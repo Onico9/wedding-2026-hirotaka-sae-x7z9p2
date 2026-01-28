@@ -3,95 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Passcode</title>
+    <title>Wedding Invitation</title>
     <style>
         body {
-            font-family: "Yu Mincho", "MS Mincho", serif;
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            background-color: #f0f0f0;
         }
 
         .login-container {
             text-align: center;
+            background-color: #fff;
             padding: 40px;
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
         }
 
-        h1 {
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            font-size: 1.2rem;
+        /* 挙式日入力のテキストをシックな明朝体に */
+        .instruction-text {
+            font-family: "Yu Mincho", "MS Mincho", serif;
+            font-size: 1.1rem;
             margin-bottom: 20px;
+            letter-spacing: 0.05em;
         }
 
-        input {
-            font-family: "Times New Roman", "Yu Mincho", serif;
+        input[type="password"] {
+            width: 80%;
             padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-bottom: 1px solid #ccc;
-            outline: none;
-            text-align: center;
-            letter-spacing: 0.2em;
-            width: 200px;
             margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            text-align: center;
         }
 
         button {
-            display: block;
-            margin: 20px auto 0;
-            padding: 8px 30px;
-            background-color: #555;
-            color: white;
+            width: 85%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
-            font-family: inherit;
-            letter-spacing: 0.1em;
-            transition: 0.3s;
+            font-size: 1rem;
         }
 
         button:hover {
-            background-color: #888;
+            background-color: #555;
         }
 
         #error-message {
-            color: #d9534f;
-            font-size: 0.85rem;
+            color: red;
             margin-top: 15px;
-            height: 1.2em; /* レイアウト崩れ防止 */
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
 <div class="login-container">
-    <h1>挙式日8桁を入力</h1>
-    <input type="password" id="passcode" placeholder="YYYYMMDD">
-    <button onclick="checkPasscode()">Enter</button>
-    <div id="error-message"></div>
+    <div class="instruction-text">挙式日8桁を入力</div>
+    <input type="password" id="password" placeholder="YYYYMMDD">
+    <button onclick="checkPassword()">Enter</button>
+    <p id="error-message"></p>
 </div>
 
 <script>
-    function checkPasscode() {
-        const input = document.getElementById('passcode').value;
+    function checkPassword() {
+        const passwordInput = document.getElementById('password').value;
         const errorMessage = document.getElementById('error-message');
-        
-        // ここに正解の挙式日（例: 20241022）を設定してください
-        const correctPasscode = "20241022"; 
 
-        if (input === correctPasscode) {
-            // 正解の場合の遷移先URLを入力してください
-            window.location.href = "welcome.html"; 
+        // ここに設定したい8桁の数字を入れてください
+        if (passwordInput === '20241022') {
+            window.location.href = 'main.html'; 
         } else {
-            // エラーメッセージの変更
-            errorMessage.innerText = "passcodeが違います";
+            // エラー文言を修正
+            errorMessage.textContent = 'passcodeが違います';
         }
     }
 </script>
