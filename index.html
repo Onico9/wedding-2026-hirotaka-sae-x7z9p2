@@ -38,10 +38,11 @@
         .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.1em; transition: 0.3s; }
         .fixed-nav a.disabled { color: #aaa; opacity: 0.5; pointer-events: none; }
         
-        /* 鍵のグレーを確実に設定 */
+        /* 鍵のグレー設定 */
         .lock-icon { 
             display: inline-block;
-            filter: grayscale(100%) opacity(0.4); /* 絵文字を強制的にグレーにする */
+            filter: grayscale(100%) brightness(1.5) opacity(0.5);
+            color: #aaa !important;
             margin-right: 2px;
             font-style: normal;
         }
@@ -56,13 +57,11 @@
 
         .scroll-down { position: absolute; right: 30px; bottom: 30px; z-index: 5; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; }
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
-        @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
         /* --- メッセージエリア --- */
         .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
-        
         .message-rsvp-notice { color: var(--gold-accent); font-size: 0.9rem; margin-top: 40px; font-weight: 700; }
 
         /* --- メニューボタン --- */
@@ -77,13 +76,19 @@
         /* --- RSVPエリア --- */
         .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .rsvp-deadline { font-size: 0.85rem; color: var(--gold-accent); letter-spacing: 0.15em; margin-bottom: 25px; font-weight: 700; }
-        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent) !important; color: var(--gold-accent) !important; padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; transition: 0.3s; box-sizing: border-box; display: inline-block; }
-        .btn-rsvp:hover { background-color: var(--gold-accent) !important; color: #fff !important; }
+        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent) !important; color: var(--gold-accent) !important; padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; transition: 0.3s; display: inline-block; }
 
         /* --- 下部セクション --- */
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
         .section-sub-title { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 20px; font-weight: 700; }
         .faq-link { text-decoration: none; color: var(--text-color); font-size: 0.85rem; border-bottom: 1px solid #d1d1d1; padding-bottom: 3px; }
+        .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 12px; letter-spacing: 0.05em; line-height: 1.6; }
+        
+        .news-box { margin-top: 60px; }
+        .news-list { list-style: none; padding: 0; margin: 0 auto; max-width: 400px; }
+        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 10px 0; display: flex; justify-content: space-between; gap: 15px; }
+        .news-date { color: #aaa; font-weight: 700; }
+        .news-content { flex: 1; text-align: left; color: #666; }
 
         .fade-in-active { opacity: 1; }
         .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 25px 0; transition: width 2s ease; transition-delay: 2.5s; }
@@ -101,7 +106,6 @@
             .menu-row { flex-direction: column; gap: 15px; align-items: center; }
             .btn-minimal { width: 100%; max-width: 280px; }
             .scroll-down { right: 15px; color: var(--text-color); }
-            .scroll-down::after { background: var(--text-color); }
         }
     </style>
 </head>
@@ -163,12 +167,10 @@
                 </div>
                 <div class="menu-row">
                     <a href="profile.html" class="btn-minimal">PROFILE</a>
-                    
                     <div class="btn-minimal disabled">
                         <span><span class="lock-icon">🔒</span>GALLERY</span>
                         <span class="status-tag">4月末公開予定</span>
                     </div>
-
                     <div class="btn-minimal disabled">
                         <span><span class="lock-icon">🔒</span>MUSIC</span>
                         <span class="status-tag">当日公開予定</span>
@@ -187,6 +189,16 @@
             <div class="faq-box">
                 <div class="section-sub-title">FAQ</div>
                 <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
+                <div class="faq-note">※会場の設備・サービスに関する詳細は上記よりご確認いただけます</div>
+            </div>
+            <div class="news-box">
+                <div class="section-sub-title">WHAT'S NEW</div>
+                <ul class="news-list">
+                    <li class="news-item">
+                        <span class="news-date">2026.01.29</span>
+                        <span class="news-content">WEB招待状を公開しました。</span>
+                    </li>
+                </ul>
             </div>
         </section>
     </div>
@@ -199,9 +211,7 @@
         const error = document.getElementById('gate-error');
 
         function checkGate() {
-            // 入力された文字を半角に変換し、スペースを除去
             let inputVal = passInput.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).trim();
-            
             if (inputVal === '20260516') {
                 localStorage.setItem('wedding_auth_time', new Date().getTime());
                 gate.style.opacity = '0';
@@ -212,14 +222,13 @@
                 }, 1000);
             } else { 
                 error.style.display = 'block';
-                passInput.value = ''; // 間違えたらクリア
+                passInput.value = '';
             }
         }
 
         unlockBtn.addEventListener('click', checkGate);
         passInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkGate(); });
 
-        // 自動ログイン
         window.onload = () => {
             const lastLogin = localStorage.getItem('wedding_auth_time');
             if (lastLogin && (new Date().getTime() - lastLogin < 15 * 60 * 1000)) {
