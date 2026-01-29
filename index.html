@@ -96,7 +96,7 @@
         }
         .btn-minimal:hover { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
 
-        /* --- RSVPセクション (アニメーション停止・期日修正) --- */
+        /* --- RSVPセクション --- */
         .rsvp-section {
             background-color: var(--soft-gold);
             padding: 60px 30px;
@@ -122,14 +122,12 @@
             font-size: 0.8rem;
             letter-spacing: 0.3em;
             transition: 0.3s;
-            /* アニメーションを削除 */
         }
         .btn-rsvp:hover { 
             background-color: var(--gold-accent) !important; 
             color: #fff !important;
-            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.1); /* ホバー時のみ少し浮かす */
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.1);
         }
-        
         .rsvp-caption {
             font-size: 0.7rem;
             color: var(--gold-accent);
@@ -137,7 +135,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* --- FAQ / NEWS --- */
+        /* --- 下部セクション (FAQ / NEWS) --- */
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
         .section-sub-title { font-size: 0.75rem; letter-spacing: 0.2em; color: #888; margin-bottom: 20px; font-weight: 700; }
         
@@ -253,7 +251,12 @@
         <section class="bottom-section">
             <div class="faq-box">
                 <div class="section-sub-title">FAQ</div>
-                <a href="faq.html" class="faq-link">よくあるご質問はこちら</a>
+                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">
+                    THE KAWABUN NAGOYA 公式FAQ
+                </a>
+                <div style="font-size: 0.6rem; color: #aaa; margin-top: 10px; letter-spacing: 0.05em;">
+                    ※会場の設備・サービスに関する詳細は上記よりご確認いただけます
+                </div>
             </div>
 
             <div class="news-box">
