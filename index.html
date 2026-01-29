@@ -11,7 +11,7 @@
             --main-bg: #f8f7f5; 
             --text-color: #4a4a4a; 
             --gold-accent: #c5a059;
-            --soft-gold: #f2ede4; /* RSVP背景用の淡い色 */
+            --soft-gold: #f2ede4;
         }
 
         /* --- ロック画面 --- */
@@ -96,10 +96,10 @@
         }
         .btn-minimal:hover { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
 
-        /* --- RSVPセクション（差別化：背景色を追加） --- */
+        /* --- RSVPセクション (サイズ最適化) --- */
         .rsvp-section {
-            background-color: var(--soft-gold); /* ほんのり色を付けて差別化 */
-            padding: 80px 30px;
+            background-color: var(--soft-gold);
+            padding: 60px 30px;
             margin: 40px 0 80px;
             display: flex;
             flex-direction: column;
@@ -107,34 +107,46 @@
             text-align: center;
         }
         .rsvp-deadline {
-            font-size: 0.8rem; color: var(--gold-accent);
-            letter-spacing: 0.15em; margin-bottom: 25px;
+            font-size: 0.75rem; color: var(--gold-accent);
+            letter-spacing: 0.15em; margin-bottom: 20px;
             font-weight: 700;
         }
         .btn-rsvp {
-            width: 100%; max-width: 320px;
-            background: #fff; /* ボタンの中を白に */
+            width: 240px; /* 横幅を絞ってスマートに */
+            background: #fff;
             border: 1px solid var(--gold-accent) !important;
             color: var(--gold-accent) !important;
-            padding: 25px 0;
+            padding: 16px 0; /* 縦幅をスリム化 */
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
             animation: pulse 3s infinite;
+            transition: 0.3s;
         }
         .btn-rsvp:hover { background-color: var(--gold-accent) !important; color: #fff !important; }
+        
+        .rsvp-caption {
+            font-size: 0.7rem;
+            color: var(--gold-accent);
+            margin-top: 15px;
+            letter-spacing: 0.05em;
+        }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.2); }
-            50% { transform: scale(1.03); box-shadow: 0 0 20px 0 rgba(197, 160, 89, 0.1); }
+            50% { transform: scale(1.03); box-shadow: 0 0 15px 0 rgba(197, 160, 89, 0.1); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
         }
 
-        /* --- FAQ / NEWS (簡素化) --- */
+        /* --- FAQ / NEWS --- */
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
         .section-sub-title { font-size: 0.75rem; letter-spacing: 0.2em; color: #888; margin-bottom: 20px; font-weight: 700; }
         
-        .faq-box { margin-bottom: 80px; }
+        .faq-box { margin-bottom: 60px; }
         .faq-link { 
             text-decoration: none; color: var(--text-color); font-size: 0.8rem; 
-            letter-spacing: 0.1em; border-bottom: 1px solid #d1d1d1; padding-bottom: 5px;
+            letter-spacing: 0.1em; border-bottom: 1px solid #d1d1d1; padding-bottom: 3px;
             transition: 0.3s;
         }
         .faq-link:hover { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
@@ -144,7 +156,7 @@
         .news-date { color: #aaa; flex-shrink: 0; }
         .news-content { color: #666; }
 
-        /* --- Hero演出等 --- */
+        /* --- Hero演出 --- */
         .fade-in-active { opacity: 1; }
         .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 20px 0; transition: width 2s ease; transition-delay: 2.5s; }
         .gold-separator.show { width: 80px; }
@@ -236,7 +248,8 @@
 
         <section class="rsvp-section">
             <div class="rsvp-deadline">PLEASE REPLY BY 2026.04.16</div>
-            <a href="form.html" class="btn-minimal btn-rsvp">RSVP - ご出席のお返事</a>
+            <a href="form.html" class="btn-rsvp">RSVP</a>
+            <div class="rsvp-caption">ご出席のお返事はこちら</div>
         </section>
 
         <section class="bottom-section">
