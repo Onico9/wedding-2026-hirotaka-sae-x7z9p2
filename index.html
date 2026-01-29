@@ -13,7 +13,7 @@
             --gold-accent: #c5a059;
         }
 
-        /* --- ロック画面のスタイル --- */
+        /* --- ロック画面 --- */
         #gate-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--main-bg);
@@ -38,7 +38,7 @@
         .gate-btn:hover { background: var(--gold-accent); color: #fff; }
         .error-msg { color: #d9534f; font-size: 0.7rem; margin-top: 10px; display: none; }
 
-        /* --- 本編の内容 --- */
+        /* --- 本編 --- */
         #main-content { display: none; }
 
         body, html { 
@@ -47,32 +47,34 @@
             -webkit-font-smoothing: antialiased; scroll-behavior: smooth;
             overflow-x: hidden;
         }
+
+        /* 固定ナビホバー設定 */
         .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding-right: 5%; gap: 20px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
-        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.15em; position: relative; padding: 5px 0; }
-        
-        /* --- Hero修正: フォントサイズと隙間 --- */
+        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.15em; position: relative; padding: 5px 0; transition: 0.3s; }
+        .fixed-nav a:hover { color: var(--gold-accent); }
+
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: center; padding-top: 60px; box-sizing: border-box; }
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; }
         .hero-right { flex: 1.2; height: 80vh; background: url('web用.jpg') no-repeat center center; background-size: cover; border-radius: 200px 0 0 10px; margin-right: -2%; position: relative; z-index: 1; }
         
         .invitation-text { 
             font-weight: 900; 
-            font-size: clamp(1.5rem, 6vw, 3.2rem); /* サイズを少し下げた */
-            margin: 0; line-height: 1.5; /* 行間を広げて隙間を確保 */
-            letter-spacing: 0.2em; /* 字間を広げた */
+            font-size: clamp(1.5rem, 6vw, 3.2rem); 
+            margin: 0; line-height: 1.5; 
+            letter-spacing: 0.2em; 
             text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; 
         }
         .invitation-text span { display: block; }
 
-        /* --- Scroll Down アニメーション --- */
+        /* --- Scroll Down (文字色を白に変更) --- */
         .scroll-down {
             position: absolute; right: 30px; bottom: 30px; z-index: 5;
             writing-mode: vertical-rl; font-size: 0.6rem; letter-spacing: 0.2em;
-            color: var(--text-color); text-decoration: none;
+            color: #fff; text-decoration: none; /* 文字色を白に */
         }
         .scroll-down::after {
             content: ""; position: absolute; bottom: -60px; left: 50%;
-            width: 1px; height: 50px; background: var(--text-color);
+            width: 1px; height: 50px; background: #fff; /* ラインを白に */
             animation: scrollLine 2s infinite;
         }
         @keyframes scrollLine {
@@ -82,7 +84,25 @@
             100% { transform: scaleY(0); transform-origin: bottom; }
         }
 
-        /* --- その他パーツ（変更なし） --- */
+        /* --- 下部メニュー設定 --- */
+        .menu-grid { max-width: 900px; margin: 0 auto 100px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 30px; }
+        .btn-minimal { font-weight: 700; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.75rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; }
+        
+        /* 通常ボタンのホバー：文字と下線をゴールドに */
+        .btn-minimal:not(.btn-rsvp):hover {
+            color: var(--gold-accent);
+            border-bottom: 1px solid var(--gold-accent);
+        }
+
+        /* RSVPボタンのホバー：BOXをゴールドに */
+        .btn-rsvp { grid-column: 1 / span 4; border: 1px solid #d1d1d1; margin-top: 10px; border-bottom: 1px solid #d1d1d1; }
+        .btn-rsvp:hover {
+            background-color: var(--gold-accent);
+            color: #fff;
+            border: 1px solid var(--gold-accent);
+        }
+
+        /* --- その他パーツ --- */
         .fade-in-active { opacity: 1; }
         .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 20px 0; transition: width 2s ease; transition-delay: 2.5s; }
         .gold-separator.show { width: 80px; }
@@ -93,17 +113,15 @@
         .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 500px; margin: 0 auto; line-height: 2.5; letter-spacing: 0.08em; font-size: 0.95rem; }
-        .menu-grid { max-width: 900px; margin: 0 auto 100px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 30px; }
-        .btn-minimal { font-weight: 700; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.75rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; }
-        .btn-rsvp { grid-column: 1 / span 4; border: 1px solid #d1d1d1; margin-top: 10px; }
-        
+
         @media (max-width: 768px) {
             .hero { flex-direction: column; height: auto; min-height: 100vh; padding-top: 80px; justify-content: flex-start; }
             .hero-left { padding: 40px 20px 20px 20px; align-items: flex-start; text-align: left; flex: none; width: 100%; box-sizing: border-box; }
             .hero-right { height: 45vh; width: 85%; align-self: flex-end; border-radius: 100px 0 0 10px; margin-right: -2%; margin-top: 20px; }
             .menu-grid { grid-template-columns: 1fr 1fr; }
             .btn-rsvp { grid-column: 1 / span 2; }
-            .scroll-down { right: 15px; }
+            .scroll-down { right: 15px; color: var(--text-color); } /* モバイルで写真に被らない場合は色を戻す設定も可能 */
+            .scroll-down::after { background: var(--text-color); }
         }
     </style>
 </head>
@@ -171,13 +189,10 @@
         const main = document.getElementById('main-content');
         const error = document.getElementById('gate-error');
 
-        // --- 15分間のキャッシュチェック ---
         window.addEventListener('load', () => {
             const lastLogin = localStorage.getItem('wedding_auth_time');
             const now = new Date().getTime();
-            
             if (lastLogin && (now - lastLogin < 15 * 60 * 1000)) {
-                // 15分以内ならゲートを表示せずメインへ
                 gate.style.display = 'none';
                 main.style.display = 'block';
                 startAnimation();
@@ -191,9 +206,7 @@
             });
 
             if (pass === '20260516') {
-                // ログイン成功時間を保存
                 localStorage.setItem('wedding_auth_time', new Date().getTime());
-                
                 gate.style.opacity = '0';
                 setTimeout(() => {
                     gate.style.display = 'none';
@@ -213,7 +226,7 @@
             setTimeout(() => document.getElementById("gold-line").classList.add("show"), 500);
             setTimeout(() => {
                 const namesBox = document.getElementById("names-box");
-                if (namesBox.innerHTML === "") { // 重複入力防止
+                if (namesBox.innerHTML === "") {
                     let i = 0; const text = "HIROTAKA & SAE";
                     function type() { 
                         if(i < text.length) { 
