@@ -36,19 +36,12 @@
         body, html { margin: 0; padding: 0; background: var(--main-bg); color: var(--text-color); font-family: 'Zen Old Mincho', serif; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* --- ナビゲーション --- */
-        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding-right: 5%; gap: 15px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
-        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.1em; transition: 0.3s; }
+        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding: 0 4%; gap: 12px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
         .fixed-nav a:hover:not(.disabled) { color: var(--gold-accent); }
         .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.7; pointer-events: none; }
         
-        .lock-icon { 
-            display: inline-block;
-            filter: grayscale(100%) contrast(0.8) brightness(0.8);
-            color: var(--charcoal-gray) !important;
-            margin-right: 4px;
-            font-style: normal;
-            font-size: 0.75rem;
-        }
+        .lock-icon { display: inline-block; filter: grayscale(100%); margin-right: 2px; font-size: 0.65rem; }
 
         /* --- ヒーローエリア --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
@@ -75,60 +68,56 @@
         @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
         /* --- メッセージエリア --- */
-        .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
+        .message-section { padding: 100px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
         .message-rsvp-notice { color: var(--gold-accent); font-size: 0.9rem; margin-top: 40px; font-weight: 700; }
 
         /* --- メニューボタン --- */
         .menu-section { padding: 60px 0 20px; }
-        .menu-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 0 30px; }
-        .menu-row { display: flex; justify-content: center; gap: 20px; width: 100%; }
-        .btn-minimal { flex: 0 1 200px; font-weight: 700; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .btn-minimal:hover:not(.disabled) { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
-        .btn-minimal.disabled { color: var(--charcoal-gray); border-bottom: 1px solid #e0e0e0; pointer-events: none; }
-        .status-tag { display: block; letter-spacing: 0.05em; font-weight: 400; margin-top: 5px; color: #888; font-size: 0.6rem; }
+        .menu-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0 20px; }
+        .menu-row { display: flex; justify-content: center; width: 100%; border-top: 1px solid #eee; }
+        .menu-row:last-child { border-bottom: 1px solid #eee; }
+        .btn-minimal { flex: 1; font-weight: 700; text-decoration: none; color: var(--text-color); padding: 25px 5px; font-size: 0.75rem; letter-spacing: 0.2em; text-align: center; transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 1px solid #eee; }
+        .btn-minimal:last-child { border-right: none; }
+        .btn-minimal:hover:not(.disabled) { color: var(--gold-accent); }
+        .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
+        .status-tag { display: block; letter-spacing: 0; font-weight: 400; margin-top: 4px; color: #999; font-size: 0.55rem; }
 
         /* --- RSVPエリア --- */
         .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .rsvp-deadline { font-size: 0.85rem; color: var(--gold-accent); letter-spacing: 0.15em; margin-bottom: 25px; font-weight: 700; }
-        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent) !important; color: var(--gold-accent) !important; padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; transition: 0.3s; display: inline-block; }
-        .rsvp-caption { font-size: 0.65rem; color: #888; margin-top: 10px; letter-spacing: 0.05em; }
+        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; transition: 0.3s; display: inline-block; }
 
         /* --- 下部セクション --- */
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
         .section-sub-title { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 20px; font-weight: 700; }
-        .faq-link { text-decoration: none; color: var(--text-color); font-size: 0.85rem; border-bottom: 1px solid #d1d1d1; padding-bottom: 3px; }
-        .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 12px; letter-spacing: 0.05em; line-height: 1.6; }
-        
         .news-box { margin-top: 60px; }
-        .news-list { list-style: none; padding: 0; margin: 0 auto; max-width: 400px; }
-        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 10px 0; display: flex; justify-content: space-between; gap: 15px; }
-        .news-date { color: #aaa; font-weight: 700; }
-        .news-content { flex: 1; text-align: left; color: #666; }
+        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 12px 0; display: flex; justify-content: space-between; gap: 15px; }
 
-        .fade-in-active { opacity: 1; }
-        .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 25px 0; transition: width 2s ease; transition-delay: 2.5s; }
-        .gold-separator.show { width: 100px; }
-        .names-container { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.3em; color: #666; min-height: 1.5em; }
-        .info-box { margin-top: 25px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
-        .info-box.show { opacity: 1; transform: translateY(0); }
-        .info-date, .info-venue, .info-time { display: block; font-size: 0.85rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
-
+        /* --- モバイル最適化 --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column-reverse; height: auto; min-height: 100vh; padding-top: 60px; }
-            .hero-left { padding: 60px 30px; width: 100%; box-sizing: border-box; }
+            .fixed-nav { gap: 8px; padding: 0 2%; }
+            .fixed-nav a { font-size: 0.6rem; letter-spacing: 0; }
+            
+            .hero { flex-direction: column; height: auto; padding-top: 60px; }
+            .hero-left { padding: 60px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
             .hero-right { 
-                height: 60vh; 
+                height: 55vh; 
                 width: 100%; 
-                border-radius: 100px 0 0 0; 
-                margin-top: 0; 
-                background-position: center center; 
+                border-radius: 80px 0 0 0; 
+                flex: none;
             }
-            .invitation-text { font-size: 2.3rem; }
-            .menu-row { flex-direction: column; gap: 15px; align-items: center; }
-            .btn-minimal { width: 100%; max-width: 280px; }
-            .scroll-down { right: 15px; color: #fff; }
+            .invitation-text { font-size: 2.1rem; }
+            .scroll-down { color: var(--text-color); right: 20px; }
+            .scroll-down::after { background: var(--text-color); }
+
+            /* 下部メニュー：上段2つ、下段3つの構成 */
+            .menu-row:nth-child(1) .btn-minimal { flex: 1 1 50%; }
+            .menu-row:nth-child(2) .btn-minimal { 
+                flex: 1 1 33.3%; 
+                font-size: 0.65rem; /* 3つ並ぶので少し文字を小さく */
+                padding: 20px 2px;
+            }
         }
     </style>
 </head>
@@ -149,7 +138,7 @@
             <a href="program.html">PROGRAM</a>
             <a href="profile.html">PROFILE</a>
             <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank">GALLERY</a>
-            <a href="#" class="disabled"><span class="lock-icon">🔒</span>MUSIC</a>
+            <a href="#" class="disabled">MUSIC</a>
             <a href="form.html">RSVP</a>
         </nav>
 
@@ -192,8 +181,8 @@
                     <a href="profile.html" class="btn-minimal">PROFILE</a>
                     <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
                     <div class="btn-minimal disabled">
-                        <span><span class="lock-icon">🔒</span>MUSIC</span>
-                        <span class="status-tag">当日公開予定</span>
+                        <span>MUSIC</span>
+                        <span class="status-tag">当日公開</span>
                     </div>
                 </div>
             </div>
@@ -202,18 +191,17 @@
         <section class="rsvp-section">
             <div class="rsvp-deadline">PLEASE REPLY BY 2026.04.15</div>
             <a href="form.html" class="btn-rsvp">RSVP</a>
-            <div class="rsvp-caption">ご出席のお返事はこちら</div>
+            <div class="rsvp-caption" style="font-size: 0.65rem; color: #888; margin-top: 10px;">ご出席のお返事はこちら</div>
         </section>
 
         <section class="bottom-section">
             <div class="faq-box">
                 <div class="section-sub-title">FAQ</div>
-                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
-                <div class="faq-note">※会場の設備・サービスに関する詳細は上記よりご確認いただけます</div>
+                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" style="text-decoration:none; color:var(--text-color); border-bottom:1px solid #d1d1d1; font-size:0.8rem; padding-bottom:3px;">THE KAWABUN NAGOYA 公式FAQ</a>
             </div>
             <div class="news-box">
                 <div class="section-sub-title">WHAT'S NEW</div>
-                <ul class="news-list">
+                <ul class="news-list" style="list-style:none; padding:0;">
                     <li class="news-item">
                         <span class="news-date">2026.04.25</span>
                         <span class="news-content">GALLERYを公開しました。</span>
@@ -267,7 +255,10 @@
             }, 100);
 
             setTimeout(() => document.getElementById("main-title").classList.add("fade-in-active"), 100);
-            setTimeout(() => document.getElementById("gold-line").classList.add("show"), 500);
+            setTimeout(() => {
+                const line = document.getElementById("gold-line");
+                if(line) line.style.width = "100px";
+            }, 500);
             
             setTimeout(() => {
                 const namesBox = document.getElementById("names-box");
