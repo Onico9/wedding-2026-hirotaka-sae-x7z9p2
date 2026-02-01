@@ -52,13 +52,26 @@
         /* --- ヒーローエリア --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: center; padding-top: 60px; box-sizing: border-box; }
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; }
-        .hero-right { flex: 1.2; height: 80vh; background: url('web用.jpg') no-repeat center center; background-size: cover; border-radius: 200px 0 0 10px; margin-right: -2%; position: relative; z-index: 1; }
+        
+        /* 写真の表示位置を調整（お二人の立ち位置に合わせる） */
+        .hero-right { 
+            flex: 1.2; 
+            height: 80vh; 
+            background: url('web用.JPG') no-repeat; 
+            background-position: center right; /* 右側のお二人を優先 */
+            background-size: cover; 
+            border-radius: 200px 0 0 10px; 
+            margin-right: -2%; 
+            position: relative; 
+            z-index: 1; 
+        }
         
         .invitation-text { font-weight: 900; font-size: clamp(2.2rem, 8vw, 3.5rem); margin: 0; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
         .invitation-text span { display: block; }
 
         .scroll-down { position: absolute; right: 30px; bottom: 30px; z-index: 5; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; }
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
+        @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
         /* --- メッセージエリア --- */
         .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
@@ -104,11 +117,19 @@
         @media (max-width: 768px) {
             .hero { flex-direction: column; height: auto; min-height: 100vh; padding-top: 80px; }
             .hero-left { padding: 40px 30px; width: 100%; box-sizing: border-box; }
-            .hero-right { height: 45vh; width: 90%; align-self: flex-end; border-radius: 100px 0 0 10px; margin-top: 20px; }
+            .hero-right { 
+                height: 55vh; /* スマホでお二人の表情が見えるよう少し高さを調整 */
+                width: 95%; 
+                align-self: flex-end; 
+                border-radius: 100px 0 0 10px; 
+                margin-top: 20px; 
+                background-position: center right; /* スマホでもお二人を優先 */
+            }
             .invitation-text { font-size: 2.3rem; }
             .menu-row { flex-direction: column; gap: 15px; align-items: center; }
             .btn-minimal { width: 100%; max-width: 280px; }
             .scroll-down { right: 15px; color: var(--text-color); }
+            .scroll-down::after { background: var(--text-color); }
         }
     </style>
 </head>
@@ -128,7 +149,7 @@
             <a href="venue.html">VENUE</a>
             <a href="program.html">PROGRAM</a>
             <a href="profile.html">PROFILE</a>
-            <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank">GALLERY</a>
+            <a href="#" class="disabled"><span class="lock-icon">🔒</span>GALLERY</a>
             <a href="#" class="disabled"><span class="lock-icon">🔒</span>MUSIC</a>
             <a href="form.html">RSVP</a>
         </nav>
@@ -170,9 +191,10 @@
                 </div>
                 <div class="menu-row">
                     <a href="profile.html" class="btn-minimal">PROFILE</a>
-                    
-                    <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
-
+                    <div class="btn-minimal disabled">
+                        <span><span class="lock-icon">🔒</span>GALLERY</span>
+                        <span class="status-tag">4月末公開予定</span>
+                    </div>
                     <div class="btn-minimal disabled">
                         <span><span class="lock-icon">🔒</span>MUSIC</span>
                         <span class="status-tag">当日公開予定</span>
@@ -196,10 +218,6 @@
             <div class="news-box">
                 <div class="section-sub-title">WHAT'S NEW</div>
                 <ul class="news-list">
-                    <li class="news-item">
-                        <span class="news-date">2026.04.XX</span>
-                        <span class="news-content">GALLERYページを公開しました。</span>
-                    </li>
                     <li class="news-item">
                         <span class="news-date">2026.01.29</span>
                         <span class="news-content">WEB招待状を公開しました。</span>
