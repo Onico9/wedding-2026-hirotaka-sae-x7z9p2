@@ -59,10 +59,10 @@
             background: url('web用.JPG') no-repeat; 
             background-position: center center; 
             background-size: cover; 
-            border-radius: 200px 0 0 0; /* 左上のみR、下部は直線なし（画面端まで） */
+            border-radius: 200px 0 0 0; 
             position: relative; 
             z-index: 1;
-            opacity: 0; /* フェードのみ */
+            opacity: 0;
             transition: opacity 3s ease;
         }
         .hero-right.fade-in-active { opacity: 1; }
@@ -101,7 +101,6 @@
         .faq-link { text-decoration: none; color: var(--text-color); font-size: 0.85rem; border-bottom: 1px solid #d1d1d1; padding-bottom: 3px; }
         .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 12px; letter-spacing: 0.05em; line-height: 1.6; }
         
-        /* WHAT'S NEW スタイル */
         .news-box { margin-top: 60px; }
         .news-list { list-style: none; padding: 0; margin: 0 auto; max-width: 400px; }
         .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 10px 0; display: flex; justify-content: space-between; gap: 15px; }
@@ -149,7 +148,7 @@
             <a href="venue.html">VENUE</a>
             <a href="program.html">PROGRAM</a>
             <a href="profile.html">PROFILE</a>
-            <a href="#" class="disabled"><span class="lock-icon">🔒</span>GALLERY</a>
+            <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank">GALLERY</a>
             <a href="#" class="disabled"><span class="lock-icon">🔒</span>MUSIC</a>
             <a href="form.html">RSVP</a>
         </nav>
@@ -191,10 +190,7 @@
                 </div>
                 <div class="menu-row">
                     <a href="profile.html" class="btn-minimal">PROFILE</a>
-                    <div class="btn-minimal disabled">
-                        <span><span class="lock-icon">🔒</span>GALLERY</span>
-                        <span class="status-tag">4月末公開予定</span>
-                    </div>
+                    <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
                     <div class="btn-minimal disabled">
                         <span><span class="lock-icon">🔒</span>MUSIC</span>
                         <span class="status-tag">当日公開予定</span>
@@ -215,10 +211,13 @@
                 <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
                 <div class="faq-note">※会場の設備・サービスに関する詳細は上記よりご確認いただけます</div>
             </div>
-
             <div class="news-box">
                 <div class="section-sub-title">WHAT'S NEW</div>
                 <ul class="news-list">
+                    <li class="news-item">
+                        <span class="news-date">2026.04.25</span>
+                        <span class="news-content">GALLERYを公開しました。</span>
+                    </li>
                     <li class="news-item">
                         <span class="news-date">2026.01.29</span>
                         <span class="news-content">WEB招待状を公開しました。</span>
