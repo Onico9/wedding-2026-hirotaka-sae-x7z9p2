@@ -26,6 +26,8 @@
         .gate-content { text-align: center; max-width: 300px; width: 100%; }
         .gate-label { font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 10px; color: var(--text-color); }
         .gate-input { width: 100%; padding: 12px; border: none; border-bottom: 1px solid #d1d1d1; background: none; text-align: center; font-size: 1.1rem; outline: none; margin-bottom: 20px; font-family: 'Zen Old Mincho', serif; border-radius: 0; }
+        /* プレースホルダーの文字を薄く小さく調整 */
+        .gate-input::placeholder { font-size: 0.8rem; color: #aaa; letter-spacing: 0.1em; }
         .gate-btn { background: none; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 10px 40px; cursor: pointer; font-size: 0.8rem; letter-spacing: 0.2em; font-family: 'Zen Old Mincho', serif; }
         #gate-error { color: #d9534f; font-size: 0.7rem; margin-top: 15px; display: none; }
 
@@ -50,35 +52,31 @@
         }
 
         /* --- ヒーローエリア --- */
-        .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: center; padding-top: 60px; box-sizing: border-box; }
-        .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; }
+        .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
+        .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
         .hero-right { 
             flex: 1.2; 
-            height: 80vh; 
             background: url('web用.JPG') no-repeat; 
-            background-position: center right; 
+            background-position: center center; 
             background-size: cover; 
-            /* 洗練された丸角：左上と左下に優雅な曲線を */
-            border-radius: 160px 0 0 60px; 
-            margin-right: -2%; 
+            /* 左上だけに大きなRをかけ、右と下は画面端まで */
+            border-radius: 200px 0 0 0; 
             position: relative; 
             z-index: 1;
-            /* 初期状態：透明かつ少し右に配置 */
+            /* 左右移動なしのフェードのみ */
             opacity: 0;
-            transform: translateX(30px);
-            transition: opacity 2.5s ease, transform 2.5s ease;
+            transition: opacity 3s ease;
         }
         /* フェードイン実行時 */
         .hero-right.fade-in-active {
             opacity: 1;
-            transform: translateX(0);
         }
         
         .invitation-text { font-weight: 900; font-size: clamp(2.2rem, 8vw, 3.5rem); margin: 0; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
         .invitation-text span { display: block; }
 
-        .scroll-down { position: absolute; right: 30px; bottom: 30px; z-index: 5; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; }
+        .scroll-down { position: absolute; right: 30px; bottom: 30px; z-index: 5; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; text-shadow: 0 0 5px rgba(0,0,0,0.2); }
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
         @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
@@ -124,22 +122,19 @@
         .info-date, .info-venue, .info-time { display: block; font-size: 0.85rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
 
         @media (max-width: 768px) {
-            .hero { flex-direction: column; height: auto; min-height: 100vh; padding-top: 80px; }
-            .hero-left { padding: 40px 30px; width: 100%; box-sizing: border-box; }
+            .hero { flex-direction: column-reverse; height: auto; min-height: 100vh; padding-top: 60px; }
+            .hero-left { padding: 60px 30px; width: 100%; box-sizing: border-box; }
             .hero-right { 
-                height: 55vh; 
-                width: 95%; 
-                align-self: flex-end; 
-                border-radius: 80px 0 0 30px; 
-                margin-top: 20px; 
-                background-position: center right; 
-                transform: translateX(20px);
+                height: 60vh; 
+                width: 100%; 
+                border-radius: 100px 0 0 0; 
+                margin-top: 0; 
+                background-position: center center; 
             }
             .invitation-text { font-size: 2.3rem; }
             .menu-row { flex-direction: column; gap: 15px; align-items: center; }
             .btn-minimal { width: 100%; max-width: 280px; }
-            .scroll-down { right: 15px; color: var(--text-color); }
-            .scroll-down::after { background: var(--text-color); }
+            .scroll-down { right: 15px; color: #fff; }
         }
     </style>
 </head>
@@ -148,7 +143,7 @@
     <div id="gate-screen">
         <div class="gate-content">
             <div class="gate-label">ENTER PASSCODE</div>
-            <input type="tel" id="gate-pass" class="gate-input" placeholder="20260516" maxlength="8">
+            <input type="tel" id="gate-pass" class="gate-input" placeholder="挙式日8桁を入力" maxlength="8">
             <button class="gate-btn" id="unlock-btn">UNLOCK</button>
             <div id="gate-error">パスコードが違います</div>
         </div>
@@ -225,15 +220,6 @@
                 <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
                 <div class="faq-note">※会場の設備・サービスに関する詳細は上記よりご確認いただけます</div>
             </div>
-            <div class="news-box">
-                <div class="section-sub-title">WHAT'S NEW</div>
-                <ul class="news-list">
-                    <li class="news-item">
-                        <span class="news-date">2026.01.29</span>
-                        <span class="news-content">WEB招待状を公開しました。</span>
-                    </li>
-                </ul>
-            </div>
         </section>
     </div>
 
@@ -271,13 +257,11 @@
         };
 
         function startAnimation() {
-            // 写真のフェードイン開始
             setTimeout(() => {
                 const heroImg = document.querySelector(".hero-right");
                 if(heroImg) heroImg.classList.add("fade-in-active");
             }, 100);
 
-            // タイトルのフェードイン開始
             setTimeout(() => document.getElementById("main-title").classList.add("fade-in-active"), 100);
             setTimeout(() => document.getElementById("gold-line").classList.add("show"), 500);
             
