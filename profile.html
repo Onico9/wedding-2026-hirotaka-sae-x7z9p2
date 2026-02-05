@@ -21,30 +21,32 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 120px 40px; text-align: center; }
+        .container { max-width: 800px; margin: 0 auto; padding: 100px 40px; text-align: center; }
 
-        /* ページタイトルとゴールドライン */
-        .title-wrapper {
+        /* --- ページタイトルとゴールドライン（修正箇所） --- */
+        .title-area {
             margin-bottom: 100px;
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .page-title { 
             font-size: 1.8rem; 
             letter-spacing: 0.5em; 
             text-transform: uppercase; 
-            margin-bottom: 15px; 
+            margin: 0 0 15px 0; 
+            padding-left: 0.5em; /* 文字の中央寄せを正確にするため右の余白分を相殺 */
             font-weight: 900; 
             opacity: 0.8; 
-            display: block;
         }
         .gold-line {
-            width: 60px;
-            height: 1px;
+            width: 50px; /* ラインの長さ */
+            height: 1px; /* ラインの太さ */
             background-color: var(--accent-color);
-            margin: 0 auto;
+            display: block;
         }
 
-        /* プロフィールエリア */
+        /* --- プロフィールセクション --- */
         .profile-section { 
             display: flex;
             flex-direction: column;
@@ -66,7 +68,6 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.05); z-index: 2;
         }
 
-        /* 趣味の小窓 */
         .hobby-item {
             position: absolute; width: 80px; height: 80px; border-radius: 50%;
             background: #fff; padding: 2px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -97,7 +98,7 @@
             margin: 0 auto 60px;
         }
 
-        /* ゲスト紹介セクション */
+        /* --- ゲスト紹介 --- */
         .community-container { width: 100%; margin-top: 40px; }
         .community-title { 
             font-size: 1.2rem; 
@@ -124,12 +125,11 @@
             border-radius: 50%; 
             object-fit: cover; 
             position: absolute;
-            top: 55%; left: 50%; /* 少し下にずらして文字との距離を調整 */
+            top: 55%; left: 50%; 
             transform: translate(-50%, -50%);
             transition: 0.4s;
         }
         
-        /* 円の上側に配置するSVG設定 */
         .curved-text-svg { 
             position: absolute; 
             top: 0; left: 0; 
@@ -159,7 +159,6 @@
 
         .separator { width: 80px; height: 1px; background: var(--line-color); margin: 100px auto; }
         
-        /* 戻るボタン */
         .back-link { 
             display: inline-block; 
             margin-top: 80px; 
@@ -183,9 +182,9 @@
 </head>
 <body>
     <div class="container">
-        <div class="title-wrapper">
+        <div class="title-area">
             <h1 class="page-title">Profile</h1>
-            <div class="gold-line"></div>
+            <span class="gold-line"></span>
         </div>
         
         <section class="profile-section">
