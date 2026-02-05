@@ -34,19 +34,19 @@
         body, html { margin: 0; padding: 0; background: var(--main-bg); color: var(--text-color); font-family: 'Zen Old Mincho', serif; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* --- ナビゲーション --- */
-        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding: 0 4%; gap: 15px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
-        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
-        .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.7; pointer-events: none; }
+        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding: 0 4%; gap: 12px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.65rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
+        .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.5; pointer-events: none; }
 
         /* --- ヒーローエリア --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
         .hero-right { 
-            flex: 0.67; /* PC: 画面幅の約40% */
+            flex: 0.67; 
             background: url('web用.JPG') no-repeat; 
             background-size: cover; 
-            background-position: center 40%; /* 空を優先 */
+            background-position: center 40%; 
             border-radius: 150px 0 0 0; 
             position: relative; 
             z-index: 1;
@@ -59,56 +59,47 @@
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
         @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-        .invitation-text { font-weight: 900; font-size: clamp(1.8rem, 5vw, 3.0rem); margin: 0; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
+        .invitation-text { font-weight: 900; font-size: clamp(1.8rem, 5vw, 3.0rem); margin: 0; line-height: 1.1; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
         .invitation-text.fade-in-active { opacity: 1; }
         .invitation-text span { display: block; }
 
-        .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 25px 0; transition: width 2s ease; }
-        .gold-separator.show { width: 100px; }
+        .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 20px 0; transition: width 2s ease; }
+        .gold-separator.show { width: 80px; }
 
-        .names-container { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3em; color: #666; min-height: 1.5em; }
-        .info-box { margin-top: 25px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
+        .names-container { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3em; color: #666; min-height: 1.2em; }
+        .info-box { margin-top: 20px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
         .info-box.show { opacity: 1; transform: translateY(0); }
-        .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
-
-        /* --- コンテンツ --- */
-        .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
-        .message-section.is-visible { opacity: 1; transform: translateY(0); }
-        .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
-
-        .menu-section { padding: 60px 0 20px; }
-        .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
-        .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
-        .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        
-        .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
-        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
-
-        .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
+        .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.15em; color: #666; line-height: 1.8; }
 
         /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; height: 100vh; padding-top: 60px; }
+            .hero { flex-direction: column; height: 100vh; }
             .hero-left { 
-                padding: 40px 20px 20px 8%; 
-                flex: 0.55; /* 文字エリアを半分程度に */
-                justify-content: center;
+                padding: 20px 20px 10px 8%; 
+                flex: 0.45; /* 文字エリアをさらに小さく */
+                justify-content: flex-end; /* 下（画像）に寄せるのではなく上に詰める */
             }
             .hero-right { 
-                flex: 0.45; /* 画像エリアを半分程度に */
+                flex: 0.55; /* 画像エリアを広げて裾まで見せる */
                 width: 100%; 
-                border-radius: 60px 0 0 0; 
-                background-position: center 20%; 
+                border-radius: 50px 0 0 0; 
+                background-position: center bottom; /* 下部（ドレスの裾）を優先 */
             }
-            /* タイトルと情報のサイズをスマホ向けに縮小 */
-            .invitation-text { font-size: 1.6rem; letter-spacing: 0.15em; }
-            .gold-separator { margin: 15px 0; }
-            .names-container { font-size: 0.9rem; }
-            .info-box { margin-top: 15px; }
-            .info-date, .info-venue, .info-time { font-size: 0.7rem; line-height: 1.8; }
+            .invitation-text { font-size: 1.4rem; }
+            .gold-separator { margin: 10px 0; }
+            .names-container { font-size: 0.85rem; }
+            .info-box { margin-top: 10px; }
+            .info-date, .info-venue, .info-time { font-size: 0.65rem; line-height: 1.6; }
             
-            .scroll-down { right: 15px; bottom: 20px; font-size: 0.6rem; }
+            .scroll-down { right: 15px; bottom: 20px; font-size: 0.55rem; }
         }
+
+        /* --- コンテンツセクション --- */
+        .message-section { padding: 80px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
+        .message-section.is-visible { opacity: 1; transform: translateY(0); }
+        .message-text { max-width: 600px; margin: 0 auto; line-height: 2.5; letter-spacing: 0.05em; font-size: 0.95rem; }
+        .rsvp-section { background-color: var(--soft-gold); padding: 60px 30px; text-align: center; margin-bottom: 50px; }
+        .btn-rsvp { width: 220px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 15px 0; text-decoration: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em; display: inline-block; }
     </style>
 </head>
 <body>
@@ -128,7 +119,7 @@
             <a href="program.html">PROGRAM</a>
             <a href="profile.html">PROFILE</a>
             <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank">GALLERY</a>
-            <a href="#" class="disabled" style="opacity:0.5;">MUSIC</a>
+            <a href="#" class="disabled">MUSIC</a>
             <a href="form.html">ご出席回答</a>
         </nav>
 
@@ -155,38 +146,16 @@
                 皆様におかれましては 益々ご清祥のこととお慶び申し上げます<br>
                 この度 私たちは結婚式を挙げる運びとなりました<br>
                 日頃お世話になっている皆様と 穏やかなひとときを過ごせれば幸いです<br>
-                <div style="color:var(--gold-accent); font-size:0.9rem; margin-top:40px; font-weight:700;">
+                <div style="color:var(--gold-accent); font-size:0.85rem; margin-top:30px; font-weight:700;">
                     お手数ですが 2026年4月15日までに<br>
                     下記「ご出席回答」より回答をお願い申し上げます
                 </div>
             </div>
         </section>
 
-        <section class="menu-section">
-            <div class="menu-container">
-                <div class="menu-row">
-                    <a href="venue.html" class="btn-minimal">VENUE</a>
-                    <a href="program.html" class="btn-minimal">PROGRAM</a>
-                </div>
-                <div class="menu-row">
-                    <a href="profile.html" class="btn-minimal">PROFILE</a>
-                    <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
-                    <div class="btn-minimal" style="opacity:0.6; pointer-events:none;">
-                        <span>MUSIC</span>
-                        <span style="font-size:0.6rem; font-weight:400;">当日公開</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="rsvp-section">
-            <div style="font-size:0.85rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:25px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
+            <div style="font-size:0.75rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:20px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
             <a href="form.html" class="btn-rsvp">ご出席回答</a>
-        </section>
-
-        <section class="bottom-section" style="padding-bottom: 100px; text-align: center;">
-            <div style="font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px;">WHAT'S NEW</div>
-            <div style="font-size: 0.75rem; color: #666;">2026.01.29 WEB招待状を公開しました</div>
         </section>
     </div>
 
