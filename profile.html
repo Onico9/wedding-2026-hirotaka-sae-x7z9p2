@@ -5,126 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Profile | Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { 
             --main-bg: #f8f7f5; 
             --text-color: #4a4a4a; 
             --sub-text-color: #666;
+            --accent-color: #c5a059;
             --line-color: #d1d1d1;
         }
         body, html { 
-            margin: 0; 
-            padding: 0; 
-            background: var(--main-bg); 
-            color: var(--text-color); 
-            font-family: 'Zen Old Mincho', serif; 
-            -webkit-font-smoothing: antialiased;
+            margin: 0; padding: 0; background: var(--main-bg); 
+            color: var(--text-color); font-family: 'Zen Old Mincho', serif; 
+            overflow-x: hidden;
         }
 
-        .container { 
-            max-width: 800px; 
-            margin: 0 auto; 
-            padding: 120px 40px; 
-            text-align: center; 
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px; text-align: center; }
 
-        /* ページタイトル */
-        .page-title { 
-            font-size: 1.8rem; 
-            letter-spacing: 0.5em; 
-            text-transform: uppercase; 
-            margin-bottom: 100px; 
-            font-weight: 900; 
-            opacity: 0.8; 
-        }
+        .page-title { font-size: 1.8rem; letter-spacing: 0.5em; text-transform: uppercase; margin-bottom: 80px; font-weight: 900; opacity: 0.8; }
 
-        /* プロフィールセクション */
-        .profile-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 80px;
-        }
+        /* プロフィールエリア全体の配置 */
+        .profile-wrapper { position: relative; width: 320px; height: 320px; margin: 0 auto 40px; }
 
         .profile-image {
-            width: 250px; /* 画像のサイズ調整 */
-            height: 250px;
-            border-radius: 50%; /* 真円に切り抜く */
-            object-fit: cover;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInScale 1s ease forwards;
-            animation-delay: 0.3s;
+            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); z-index: 2;
         }
 
-        .profile-name {
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            margin-bottom: 20px;
-            font-weight: 700;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 1s ease forwards;
-            animation-delay: 0.6s;
+        /* ③ 趣味の小さな円形写真 */
+        .hobby-item {
+            position: absolute; width: 70px; height: 70px; border-radius: 50%;
+            background: #eee; border: 2px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            z-index: 3; cursor: pointer; transition: transform 0.3s; overflow: visible;
         }
+        .hobby-item img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .hobby-item:hover { transform: scale(1.1); }
 
-        .profile-description {
-            max-width: 500px;
-            font-size: 0.9rem;
-            line-height: 2;
-            color: var(--sub-text-color);
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 1s ease forwards;
-            animation-delay: 0.9s;
+        /* 趣味の吹き出し */
+        .hobby-item::after {
+            content: attr(data-hobby); position: absolute; bottom: -30px; left: 50%;
+            transform: translateX(-50%); background: rgba(74, 74, 74, 0.9);
+            color: #fff; padding: 4px 10px; border-radius: 12px; font-size: 0.7rem;
+            white-space: nowrap; opacity: 0; transition: opacity 0.3s; pointer-events: none;
         }
+        .hobby-item:hover::after { opacity: 1; }
 
-        /* 2人の間の区切り線 */
-        .separator {
-            width: 80px;
-            height: 1px;
-            background-color: var(--line-color);
-            margin: 80px auto; /* 上下の間隔 */
-            opacity: 0;
-            animation: fadeIn 1s ease forwards;
-            animation-delay: 1.2s;
-        }
+        /* 趣味写真の配置（時計回りに配置） */
+        .hobby-1 { top: 0; right: 20px; }
+        .hobby-2 { bottom: 40px; right: -10px; }
+        .hobby-3 { bottom: 20px; left: -10px; }
 
-        /* アニメーションキーフレーム */
-        @keyframes fadeInScale {
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+        .profile-section { margin-bottom: 120px; }
+        .profile-name { display: block; font-size: 1.5rem; letter-spacing: 0.2em; margin: 20px 0; font-weight: 700; }
+        .profile-description { max-width: 550px; margin: 0 auto 60px; font-size: 0.95rem; line-height: 2.2; color: var(--sub-text-color); text-align: left; }
 
-        /* 戻るボタン */
-        .back-link { 
-            display: inline-block; 
-            margin-top: 80px; 
-            text-decoration: none; 
-            color: var(--text-color); 
-            border-bottom: 1px solid var(--line-color); 
-            padding-bottom: 5px; 
-            font-size: 0.75rem; 
-            letter-spacing: 0.25em;
-            transition: opacity 0.3s;
+        /* ④ 参列者紹介（コミュニティ） */
+        .community-title { font-size: 1.2rem; letter-spacing: 0.3em; margin-bottom: 40px; color: var(--accent-color); font-weight: 700; }
+        .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 600px; margin: 0 auto; }
+        
+        .community-item { position: relative; width: 100%; aspect-ratio: 1/1; cursor: pointer; }
+        .community-circle { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; transition: filter 0.3s; }
+        
+        /* 縁に沿う文字 (SVG) */
+        .curved-text { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .curved-text text { font-size: 10px; font-weight: bold; fill: var(--accent-color); letter-spacing: 1px; }
+
+        /* コミュニティ紹介のポップアップ風テキスト */
+        .community-item::after {
+            content: attr(data-desc); position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.95);
+            color: var(--text-color); padding: 10px; border-radius: 5px; font-size: 0.75rem;
+            width: 80%; opacity: 0; transition: opacity 0.3s; z-index: 5; line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .back-link:hover { opacity: 0.6; }
+        .community-item:hover::after { opacity: 1; }
+        .community-item:hover .community-circle { filter: brightness(0.7); }
+
+        .separator { width: 100px; height: 1px; background-color: var(--line-color); margin: 100px auto; }
+        .back-link { display: inline-block; margin-top: 100px; text-decoration: none; color: var(--text-color); border-bottom: 1px solid var(--line-color); padding-bottom: 5px; font-size: 0.8rem; letter-spacing: 0.2em; }
 
         @media (max-width: 768px) {
-            .container { padding: 80px 30px; }
-            .page-title { font-size: 1.5rem; margin-bottom: 70px; }
-            .profile-image { width: 200px; height: 200px; }
-            .profile-name { font-size: 1.3rem; }
-            .profile-description { font-size: 0.85rem; }
+            .community-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .profile-wrapper { width: 280px; height: 280px; }
+            .profile-image { width: 180px; height: 180px; }
         }
     </style>
 </head>
@@ -133,24 +97,62 @@
         <h1 class="page-title">Profile</h1>
         
         <div class="profile-section">
-            <img src="images/groom_profile.jpg" alt="新郎 Hirotaka" class="profile-image">
+            <div class="profile-wrapper">
+                <img src="images/groom_profile.jpg" alt="HIROTAKA" class="profile-image">
+                <div class="hobby-item hobby-1" data-hobby="趣味：カメラ"><img src="https://picsum.photos/100/100?random=1"></div>
+                <div class="hobby-item hobby-2" data-hobby="趣味：キャンプ"><img src="https://picsum.photos/100/100?random=2"></div>
+                <div class="hobby-item hobby-3" data-hobby="趣味：サウナ"><img src="https://picsum.photos/100/100?random=3"></div>
+            </div>
             <span class="profile-name">HIROTAKA</span>
-            <p class="profile-description">
-                旅行とカメラが趣味のHirotakaです。Saeと出会ってから、日常がよりカラフルになりました。
-                これからの人生も、たくさんの美しい景色をSaeと一緒に見ていきたいと思っています。
-                当日は皆さんと楽しい時間を過ごせることを心より願っています。
-            </p>
+            <div class="profile-description">
+                結婚式の準備を通してこれまで出会えた<br>
+                多くの方々に支えられてきたこと強く実感しています<br><br>
+                当日皆さまにお会いできることを<br>
+                楽しみにしております
+            </div>
+
+            <h3 class="community-title">Guest Introduction</h3>
+            <div class="community-grid">
+                <div class="community-item" data-desc="中学からの付き合いで、今でもよく集まる親友たちです。">
+                    <img src="https://picsum.photos/200/200?random=11" class="community-circle">
+                    <svg class="curved-text" viewBox="0 0 100 100">
+                        <path id="circlePath1" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" />
+                        <text><textPath href="#circlePath1" startOffset="50%" text-anchor="middle">中高友人</textPath></text>
+                    </svg>
+                </div>
+                <div class="community-item" data-desc="大学のサークル仲間。共に夜通し語り合った大切な仲間。"><img src="https://picsum.photos/200/200?random=12" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="cp2" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#cp2" startOffset="50%" text-anchor="middle">大学友人</textPath></text></svg></div>
+                <div class="community-item" data-desc="社会人1年目から切磋琢磨してきた頼れる同僚たち。"><img src="https://picsum.photos/200/200?random=13" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="cp3" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#cp3" startOffset="50%" text-anchor="middle">職場の皆様</textPath></text></svg></div>
+                <div class="community-item" data-desc="幼い頃から可愛がってくれた自慢の親戚一同です。"><img src="https://picsum.photos/200/200?random=14" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="cp4" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#cp4" startOffset="50%" text-anchor="middle">親族</textPath></text></svg></div>
+                <div class="community-item" data-desc="地元の幼馴染。気兼ねなく何でも話せる存在。"><img src="https://picsum.photos/200/200?random=15" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="cp5" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#cp5" startOffset="50%" text-anchor="middle">地元の友人</textPath></text></svg></div>
+                <div class="community-item" data-desc="共通の趣味を通じて出会った刺激的な仲間たち。"><img src="https://picsum.photos/200/200?random=16" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="cp6" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#cp6" startOffset="50%" text-anchor="middle">趣味仲間</textPath></text></svg></div>
+            </div>
         </div>
 
-        <div class="separator"></div> <div class="profile-section">
-            <img src="images/bride_profile.jpg" alt="新婦 Sae" class="profile-image">
+        <div class="separator"></div>
+
+        <div class="profile-section">
+            <div class="profile-wrapper">
+                <img src="images/bride_profile.jpg" alt="SAE" class="profile-image">
+                <div class="hobby-item hobby-1" data-hobby="趣味：カフェ巡り"><img src="https://picsum.photos/100/100?random=4"></div>
+                <div class="hobby-item hobby-2" data-hobby="趣味：ヨガ"><img src="https://picsum.photos/100/100?random=5"></div>
+                <div class="hobby-item hobby-3" data-hobby="趣味：料理"><img src="https://picsum.photos/100/100?random=6"></div>
+            </div>
             <span class="profile-name">SAE</span>
-            <p class="profile-description">
-                美味しいものを食べることが大好きなSaeです。
-                いつも笑顔で私を支えてくれるHirotakaに感謝しています。
-                新しい家族として、彼と共に温かく穏やかな家庭を築いていくのが楽しみです。
-                皆様にお会いできるのを心待ちにしております。
-            </p>
+            <div class="profile-description">
+                これまでの大切なご縁に支えられて特別な日を迎えられるのを楽しみにしています<br>
+                そしてこの結婚式がこれから新しく広がるご縁のきっかけになれば嬉しいです<br><br>
+                大切な皆さまと笑顔あふれる温かな時間を過ごすのを楽しみにしています
+            </div>
+
+            <h3 class="community-title">Guest Introduction</h3>
+            <div class="community-grid">
+                <div class="community-item" data-desc="一番長く一緒に過ごしてきた、家族のような存在です。"><img src="https://picsum.photos/200/200?random=21" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="bp1" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp1" startOffset="50%" text-anchor="middle">中高友人</textPath></text></svg></div>
+                <div class="community-item" data-desc="いつも笑いが絶えない、大切な大学時代の友人たち。"><img src="https://picsum.photos/200/200?random=22" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="bp2" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp2" startOffset="50%" text-anchor="middle">大学友人</textPath></text></svg></div>
+                <div class="community-item" data-desc="公私ともに支えてくださっている尊敬する先輩と同期。"><img src="https://picsum.photos/200/200?random=23" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="bp3" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp3" startOffset="50%" text-anchor="middle">職場の皆様</textPath></text></svg></div>
+                <div class="community-item" data-desc="いつも優しく見守ってくれる大好きな親族です。"><img src="https://picsum.photos/200/200?random=24" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="bp4" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp4" startOffset="50%" text-anchor="middle">親族</textPath></text></svg></div>
+                <div class="community-item" data-desc="ゼミで一緒に頑張った一生モノの絆。"><img src="https://picsum.photos/200/200?random=25" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="bp5" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp5" startOffset="50%" text-anchor="middle">大学ゼミ</textPath></text></svg></div>
+                <div class="community-item" data-desc="ダンスを通じて出会った、パワフルで楽しい仲間！"><img src="https://picsum.photos/200/200?random=26" class="community-circle"><svg class="curved-text" viewBox="0 0 100 100"><path id="bp6" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp6" startOffset="50%" text-anchor="middle">ダンス仲間</textPath></text></svg></div>
+            </div>
         </div>
 
         <a href="index.html" class="back-link">BACK TO TOP</a>
