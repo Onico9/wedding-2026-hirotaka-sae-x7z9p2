@@ -11,7 +11,7 @@
             --text-color: #4a4a4a; 
             --sub-text-color: #666; 
             --line-color: #d1d1d1; 
-            --accent-color: #c5a059;
+            --accent-color: #c5a059; /* ゴールドラインの色 */
         }
 
         body { 
@@ -20,7 +20,6 @@
             font-family: 'Zen Old Mincho', serif; 
             line-height: 1.8; 
             background-color: var(--main-bg);
-            /* 背景画像の設定 */
             background-image: url('venue_kawabun.jpg');
             background-size: cover;
             background-position: center;
@@ -28,12 +27,11 @@
             background-repeat: no-repeat;
         }
 
-        /* 画像の上に薄いベールをかけて文字を見やすくする */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(248, 247, 245, 0.7); /* 背景色に合わせた透過 */
+            background: rgba(248, 247, 245, 0.7); 
             z-index: -1;
         }
 
@@ -44,19 +42,31 @@
             text-align: center; 
         }
 
+        /* 修正箇所：VENUEの見出しとゴールドライン */
+        .title-area {
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .page-title { 
             font-size: 2rem; 
             letter-spacing: 0.4em; 
             text-transform: uppercase; 
-            margin-bottom: 60px; 
+            margin: 0 0 15px 0; /* 下に余白 */
             font-weight: 900; 
             opacity: 0.9; 
         }
+        .gold-line {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(to right, #b8860b, #e6b422, #b8860b); /* ゴールドのグラデーション */
+            display: block;
+        }
 
-        /* 会場情報エリアの装飾 */
         .venue-card {
             background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px); /* 背景を少しぼかして高級感を出す */
+            backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             padding: 60px 40px;
             border-radius: 4px;
@@ -90,11 +100,12 @@
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
         
+        /* 修正箇所：Googleマップのグレースケールフィルタ */
         .map-frame { 
             width: 100%; 
             height: 100%; 
             border: none; 
-            filter: grayscale(1) contrast(0.8); /* 地図をモノトーンに */
+            filter: grayscale(1) contrast(0.9); 
         }
 
         .access-info { 
@@ -105,10 +116,6 @@
             color: var(--sub-text-color); 
             border-left: 1px solid var(--accent-color);
             padding-left: 20px;
-        }
-
-        .access-info p {
-            margin: 0;
         }
 
         .back-link { 
@@ -123,9 +130,7 @@
             transition: opacity 0.3s;
         }
         
-        .back-link:hover {
-            opacity: 0.6;
-        }
+        .back-link:hover { opacity: 0.6; }
 
         @media (max-width: 768px) {
             .container { padding: 60px 20px; }
@@ -136,7 +141,10 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="page-title">Venue</h1>
+        <div class="title-area">
+            <h1 class="page-title">Venue</h1>
+            <span class="gold-line"></span>
+        </div>
         
         <div class="venue-card">
             <span class="venue-name">THE KAWABUN NAGOYA</span>
@@ -144,8 +152,8 @@
             
             <div class="map-wrapper">
                 <iframe class="map-frame" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3261.427771701389!2d136.8994773152431!3d35.1708499803158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6003713024564c7b%3A0x7d6124578505417!2sTHE%20KAWABUN%20NAGOYA!5e0!3m2!1sja!2sjp!4v1612345678901!5m2!1sja!2sjp" 
-                    allowfullscreen="" loading="lazy"></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.326884042857!2d136.89979317633215!3d35.17339795837699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600376d8ec5a60a7%3A0x6b6903328e9d3d3b!2zVEhFIEtBV0FCVU4gTkFHT1lBICjYp9mE2YPYp9mI2KfYqNmI2YMg2YPYp9mI2KfYqNmI2YMp!5e0!3m2!1sja!2sjp!4v1707118000000!5m2!1sja!2sjp" 
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             <div class="access-info">
