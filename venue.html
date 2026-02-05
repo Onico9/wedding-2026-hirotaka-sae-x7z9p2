@@ -11,7 +11,7 @@
             --text-color: #4a4a4a; 
             --sub-text-color: #666; 
             --line-color: #d1d1d1; 
-            --accent-color: #c5a059; /* ゴールドラインの色 */
+            --accent-color: #c5a059;
         }
 
         body { 
@@ -19,7 +19,8 @@
             color: var(--text-color); 
             font-family: 'Zen Old Mincho', serif; 
             line-height: 1.8; 
-            background-color: var(--main-bg);
+            background-color: #000; /* 画像読み込み前のチラつき防止 */
+            /* 背景画像の設定（透過なしのそのまま表示） */
             background-image: url('venue_kawabun.jpg');
             background-size: cover;
             background-position: center;
@@ -27,13 +28,7 @@
             background-repeat: no-repeat;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(248, 247, 245, 0.7); 
-            z-index: -1;
-        }
+        /* 透過レイヤー（body::before）を削除しました */
 
         .container { 
             max-width: 800px; 
@@ -42,7 +37,6 @@
             text-align: center; 
         }
 
-        /* 修正箇所：VENUEの見出しとゴールドライン */
         .title-area {
             margin-bottom: 60px;
             display: flex;
@@ -53,24 +47,26 @@
             font-size: 2rem; 
             letter-spacing: 0.4em; 
             text-transform: uppercase; 
-            margin: 0 0 15px 0; /* 下に余白 */
+            margin: 0 0 15px 0;
             font-weight: 900; 
-            opacity: 0.9; 
+            color: #fff; /* 背景が写真そのものになるため、白文字に変更して視認性を確保 */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* 影をつけて文字を浮き立たせる */
         }
         .gold-line {
             width: 50px;
-            height: 1px;
-            background: linear-gradient(to right, #b8860b, #e6b422, #b8860b); /* ゴールドのグラデーション */
+            height: 2px;
+            background: linear-gradient(to right, #b8860b, #e6b422, #b8860b);
             display: block;
         }
 
+        /* 会場情報カードの視認性調整 */
         .venue-card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.85); /* 写真の上で見やすいよう少し不透明度をアップ */
+            backdrop-filter: blur(10px); /* すりガラス効果でさらに読みやすく */
+            -webkit-backdrop-filter: blur(10px);
             padding: 60px 40px;
             border-radius: 4px;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             margin-bottom: 40px;
         }
 
@@ -100,7 +96,6 @@
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
         
-        /* 修正箇所：Googleマップのグレースケールフィルタ */
         .map-frame { 
             width: 100%; 
             height: 100%; 
@@ -114,7 +109,7 @@
             margin: 0 auto; 
             font-size: 0.85rem; 
             color: var(--sub-text-color); 
-            border-left: 1px solid var(--accent-color);
+            border-left: 2px solid var(--accent-color);
             padding-left: 20px;
         }
 
@@ -122,15 +117,16 @@
             display: inline-block; 
             margin-top: 80px; 
             text-decoration: none; 
-            color: var(--text-color); 
-            border-bottom: 1px solid var(--line-color); 
+            color: #fff; /* 背景が写真のため白文字に */
+            border-bottom: 1px solid #fff; 
             padding-bottom: 5px; 
             font-size: 0.8rem; 
             letter-spacing: 0.2em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             transition: opacity 0.3s;
         }
         
-        .back-link:hover { opacity: 0.6; }
+        .back-link:hover { opacity: 0.7; }
 
         @media (max-width: 768px) {
             .container { padding: 60px 20px; }
@@ -152,7 +148,7 @@
             
             <div class="map-wrapper">
                 <iframe class="map-frame" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.326884042857!2d136.89979317633215!3d35.17339795837699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600376d8ec5a60a7%3A0x6b6903328e9d3d3b!2zVEhFIEtBV0FCVU4gTkFHT1lBICjYp9mE2YPYp9mI2KfYqNmI2YMg2YPYp9mI2KfYqNmI2YMp!5e0!3m2!1sja!2sjp!4v1707118000000!5m2!1sja!2sjp" 
+                    src="http://googleusercontent.com/maps.google.com/3" 
                     allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
