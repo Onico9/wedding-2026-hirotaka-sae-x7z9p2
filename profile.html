@@ -28,7 +28,6 @@
         .gold-line { width: 50px; height: 1px; background-color: var(--accent-color); display: block; }
 
         .profile-section { display: flex; flex-direction: column; align-items: center; margin-bottom: 150px; width: 100%; }
-
         .profile-wrapper { position: relative; width: 340px; height: 340px; margin-bottom: 40px; }
         .profile-main-img { width: 240px; height: 240px; border-radius: 50%; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 5px 20px rgba(0,0,0,0.05); z-index: 2; }
 
@@ -46,41 +45,42 @@
         .community-container { width: 100%; margin-top: 40px; }
         .community-title { font-size: 1.2rem; letter-spacing: 0.3em; margin-bottom: 60px; color: var(--text-color); font-weight: 700; }
         
-        /* 基本のグリッド設定 */
-        .community-grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 40px 15px; 
-            max-width: 900px; 
-            margin: 0 auto; 
-        }
-
-        /* 奇数（7つ）の時のための調整：最後3つを中央寄せにする */
-        .bride-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px 15px;
-        }
-        .bride-grid .community-item {
-            width: calc(25% - 15px); /* 4列ベース */
-        }
+        .community-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 15px; max-width: 900px; margin: 0 auto; }
+        .bride-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px 15px; }
+        .bride-grid .community-item { width: calc(25% - 15px); }
         
         .community-item { position: relative; margin-bottom: 20px; }
         .community-img-outer { position: relative; width: 100%; aspect-ratio: 1/1; cursor: pointer; }
-
         .community-circle { width: 75%; height: 75%; border-radius: 50%; object-fit: cover; position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); transition: 0.4s; }
         
         .curved-text-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
         .curved-text-svg text { font-size: 10px; font-weight: 700; fill: var(--text-color); letter-spacing: 1px; }
 
+        /* メッセージ表示用のポップアップ（極限まで余白を削る修正） */
         .community-popup {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.98); color: var(--text-color);
-            padding: 15px; border-radius: 8px; font-size: 0.75rem; width: 200%;
-            opacity: 0; transition: 0.3s; z-index: 10; pointer-events: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); line-height: 1.6; text-align: left;
-            white-space: pre-wrap; /* 改行を反映させる */
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.98); 
+            color: var(--text-color);
+            padding: 12px 18px; 
+            border-radius: 8px; 
+            font-size: 0.75rem; 
+            
+            /* 可変設定 */
+            width: max-content; 
+            min-width: auto; 
+            max-width: 260px; 
+            
+            opacity: 0; 
+            transition: 0.3s; 
+            z-index: 10; 
+            pointer-events: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            line-height: 1.6; 
+            text-align: left;
+            white-space: pre-wrap;
         }
         .community-item:hover .community-popup { opacity: 1; }
         .community-item:hover .community-circle { filter: brightness(0.8); }
@@ -93,7 +93,7 @@
         @media (max-width: 768px) {
             .community-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 10px; }
             .bride-grid .community-item { width: calc(50% - 10px); }
-            .community-popup { width: 140%; font-size: 0.7rem; }
+            .community-popup { max-width: 180px; padding: 10px 14px; font-size: 0.7rem; }
             .profile-wrapper { width: 280px; height: 280px; }
             .profile-main-img { width: 180px; height: 180px; }
         }
@@ -219,7 +219,7 @@
                         <img src="https://picsum.photos/200/200?random=23" class="community-circle">
                         <div class="community-popup">認知科学系の研究室の友達
 卒論時期は学生の居室で焼きそばを作ったり、Switchをしてたくさん遊びました！
-大学院へ進学しても仕事終わりによよく遊んだり泊まらせてくれたりして、感謝しかないです！</div>
+大学院へ進学しても仕事終わりによく遊んだり泊まらせてくれたりして、感謝しかないです！</div>
                         <svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b3" d="M 10,48 A 40,40 0 0,1 90,48" fill="none" /><text><textPath href="#b3" startOffset="50%" text-anchor="middle">大学研究室友人</textPath></text></svg>
                     </div></div>
                     <div class="community-item"><div class="community-img-outer">
