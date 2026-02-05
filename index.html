@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
     <title>Wedding Invitation | Hirotaka & Sae</title>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&display=swap" rel="stylesheet">
@@ -10,121 +10,265 @@
         :root { 
             --main-bg: #f8f7f5; 
             --text-color: #4a4a4a; 
-            --accent-color: #c5a059;
-            --line-color: #d1d1d1;
+            --gold-accent: #c5a059;
+            --soft-gold: #f2ede4;
+            --charcoal-gray: #666;
         }
-        body, html { margin: 0; padding: 0; background: var(--main-bg); color: var(--text-color); font-family: 'Zen Old Mincho', serif; -webkit-font-smoothing: antialiased; }
 
-        /* ②ドレスの裾を見せるためのメイン画像設定 */
-        .hero-section { 
-            width: 100%; 
-            height: 100vh; 
+        /* --- ロック画面 --- */
+        #gate-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--main-bg);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999; padding: 20px; box-sizing: border-box;
+            transition: opacity 1s ease;
+        }
+        .gate-content { text-align: center; max-width: 300px; width: 100%; }
+        .gate-label { font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 10px; color: var(--text-color); }
+        .gate-input { width: 100%; padding: 12px; border: none; border-bottom: 1px solid #d1d1d1; background: none; text-align: center; font-size: 1.1rem; outline: none; margin-bottom: 20px; font-family: 'Zen Old Mincho', serif; border-radius: 0; }
+        .gate-btn { background: none; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 10px 40px; cursor: pointer; font-size: 0.8rem; letter-spacing: 0.2em; font-family: 'Zen Old Mincho', serif; }
+        #gate-error { color: #d9534f; font-size: 0.7rem; margin-top: 15px; display: none; }
+
+        /* --- 本編 --- */
+        #main-content { display: none; }
+        body, html { margin: 0; padding: 0; background: var(--main-bg); color: var(--text-color); font-family: 'Zen Old Mincho', serif; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
+
+        /* --- ナビゲーション --- */
+        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding: 0 4%; gap: 15px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
+        .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.7; pointer-events: none; }
+
+        /* --- ヒーローエリア --- */
+        .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
+        .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
+        .hero-right { 
+            flex: 1.2; 
+            background: url('web用.JPG') no-repeat; 
+            /* ② ドレスの裾を映すため下部(bottom)を基準に */
+            background-position: center bottom; 
+            background-size: cover; 
+            border-radius: 200px 0 0 0; 
             position: relative; 
-            overflow: hidden; 
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 3s ease;
         }
-        .hero-img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            /* 画像の上端を基準にすることで、下まで映りやすくします */
-            object-position: top; 
-        }
+        .hero-right.fade-in-active { opacity: 1; }
         
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); }
-        .hero-text { position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); text-align: center; color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,0.3); width: 100%; }
-        .hero-names { font-size: 2.2rem; letter-spacing: 0.3em; font-weight: 700; margin-bottom: 10px; }
-        .hero-date { font-size: 1rem; letter-spacing: 0.2em; }
+        .invitation-text { font-weight: 900; font-size: clamp(2.2rem, 8vw, 3.5rem); margin: 0; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
+        .invitation-text.fade-in-active { opacity: 1; }
+        .invitation-text span { display: block; }
 
-        .container { max-width: 800px; margin: 0 auto; padding: 120px 20px; text-align: center; }
+        .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 25px 0; transition: width 2s ease; }
+        .gold-separator.show { width: 100px; }
 
-        .section-title { font-size: 1.8rem; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 60px; font-weight: 900; opacity: 0.8; }
-        .gold-line { width: 40px; height: 1px; background: var(--accent-color); margin: 0 auto 40px; }
+        .names-container { font-weight: 700; font-size: 1.2rem; letter-spacing: 0.3em; color: #666; min-height: 1.5em; }
+        .info-box { margin-top: 25px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
+        .info-box.show { opacity: 1; transform: translateY(0); }
+        .info-date, .info-venue, .info-time { display: block; font-size: 0.85rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
 
-        .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 60px; }
-        .nav-item { text-decoration: none; color: var(--text-color); border: 1px solid var(--line-color); padding: 40px 20px; transition: 0.4s; position: relative; overflow: hidden; }
-        .nav-item:hover { border-color: var(--accent-color); background: #fff; }
-        .nav-item span { display: block; letter-spacing: 0.3em; font-weight: 700; }
-        .nav-en { font-size: 0.9rem; margin-bottom: 10px; opacity: 0.6; text-transform: uppercase; }
-        .nav-jp { font-size: 0.8rem; }
+        /* SCROLL DOWN */
+        .scroll-down { position: absolute; right: 30px; bottom: 30px; z-index: 10; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; text-shadow: 0 0 5px rgba(0,0,0,0.3); }
+        .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; box-shadow: 0 0 3px rgba(0,0,0,0.2); }
+        @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-        /* ①ご出席回答（RSVP）ボタンを強調 */
-        .rsvp-section { margin-top: 100px; padding: 60px 20px; background: #fff; border: 1px solid var(--accent-color); position: relative; }
-        .rsvp-title { font-size: 1.2rem; letter-spacing: 0.3em; margin-bottom: 30px; font-weight: 700; }
-        .rsvp-btn { 
-            display: inline-block; 
-            padding: 15px 60px; 
-            background: var(--accent-color); 
-            color: #fff; 
-            text-decoration: none; 
-            letter-spacing: 0.3em; 
-            font-size: 0.9rem; 
-            transition: 0.3s;
-            font-weight: 700;
-        }
-        .rsvp-btn:hover { background: #b08d4b; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
+        /* --- メッセージ --- */
+        .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
+        .message-section.is-visible { opacity: 1; transform: translateY(0); }
+        .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
 
-        footer { padding: 60px 20px; font-size: 0.7rem; letter-spacing: 0.2em; opacity: 0.5; }
+        /* --- メニューボタン --- */
+        .menu-section { padding: 60px 0 20px; }
+        .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+        .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
+        .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .btn-minimal:hover:not(.disabled) { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
+        .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
+        .status-tag { display: block; letter-spacing: 0.05em; font-weight: 400; margin-top: 5px; color: #888; font-size: 0.6rem; }
 
+        /* --- RSVP --- */
+        .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
+        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
+
+        /* --- ボトムセクション (FAQ / WHAT'S NEW) --- */
+        .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
+        .section-label { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px; font-weight: 700; text-align: center; }
+        
+        /* NEWS 中央揃え修正 */
+        .news-box { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
+        .news-list { list-style: none; padding: 0; margin: 0 auto; width: 100%; max-width: 350px; }
+        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center; }
+        .news-date { color: #aaa; font-weight: 700; white-space: nowrap; }
+        .news-content { color: #666; text-align: left; }
+
+        /* FAQ 中央揃え修正 */
+        .faq-box { display: flex; flex-direction: column; align-items: center; }
+        .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
+        .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
+
+        /* --- モバイル最適化 --- */
         @media (max-width: 768px) {
-            .nav-grid { grid-template-columns: 1fr; gap: 15px; }
-            .hero-names { font-size: 1.8rem; }
-            .container { padding: 80px 20px; }
+            .hero { flex-direction: column; height: auto; }
+            .hero-left { padding: 80px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
+            /* モバイルでも裾が見えるように高さを調整 */
+            .hero-right { height: 70vh; width: 100%; border-radius: 80px 0 0 0; flex: none; }
+            .invitation-text { font-size: 2.2rem; }
+            .scroll-down { right: 20px; bottom: 40px; }
+
+            .menu-row { gap: 15px; }
+            .menu-row .btn-minimal { font-size: 0.7rem; letter-spacing: 0.15em; padding: 20px 0; }
+            
+            .news-list { max-width: 100%; }
+            .news-item { gap: 12px; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hero-section">
-        <img src="main_visual.jpg" alt="Hirotaka & Sae" class="hero-img">
-        <div class="hero-overlay"></div>
-        <div class="hero-text">
-            <div class="hero-names">Hirotaka & Sae</div>
-            <div class="hero-date">2026.05.23</div>
+    <div id="gate-screen">
+        <div class="gate-content">
+            <div class="gate-label">ENTER PASSCODE</div>
+            <input type="tel" id="gate-pass" class="gate-input" placeholder="挙式日8桁を入力" maxlength="8">
+            <button class="gate-btn" id="unlock-btn">UNLOCK</button>
+            <div id="gate-error" style="color:#d9534f; font-size:0.7rem; margin-top:15px; display:none;">パスコードが違います</div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="section-title">Invitation</div>
-        <div class="gold-line"></div>
-        <p style="line-height: 2.2; margin-bottom: 80px; font-size: 0.95rem;">
-            私たちは結婚いたします<br>
-            これまでの歩みを支えてくださった皆様に<br>
-            感謝を込めてささやかな宴を催します<br>
-            ぜひお越しいただければ幸いです
-        </p>
+    <div id="main-content">
+        <nav class="fixed-nav">
+            <a href="venue.html">VENUE</a>
+            <a href="program.html">PROGRAM</a>
+            <a href="profile.html">PROFILE</a>
+            <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank">GALLERY</a>
+            <a href="#" class="disabled">MUSIC</a>
+            <a href="form.html">ご出席回答</a>
+        </nav>
 
-        <div class="nav-grid">
-            <a href="profile.html" class="nav-item">
-                <span class="nav-en">Profile</span>
-                <span class="nav-jp">プロフィール</span>
-            </a>
-            <a href="program.html" class="nav-item">
-                <span class="nav-en">Program</span>
-                <span class="nav-jp">当日のご案内</span>
-            </a>
-            <a href="venue.html" class="nav-item">
-                <span class="nav-en">Venue</span>
-                <span class="nav-jp">会場アクセス</span>
-            </a>
-            <a href="gallery.html" class="nav-item">
-                <span class="nav-en">Gallery</span>
-                <span class="nav-jp">ギャラリー</span>
-            </a>
-        </div>
+        <section class="hero">
+            <div class="hero-left">
+                <h1 id="main-title" class="invitation-text"><span>WEDDING</span><span>INVITATION</span></h1>
+                <div id="gold-line" class="gold-separator"></div>
+                <div id="names-box" class="names-container"></div>
+                <div id="info-box" class="info-box">
+                    <span class="info-date">2026.5.16.SAT</span>
+                    <span class="info-venue">the kawabun nagoya</span>
+                    <span class="info-time">13:30 Reception / 14:00 Ceremony</span>
+                </div>
+            </div>
+            <div class="hero-right">
+                <a href="#message" class="scroll-down">SCROLL DOWN</a>
+            </div>
+        </section>
 
-        <div class="rsvp-section">
-            <div class="rsvp-title">ご出席回答</div>
-            <p style="font-size: 0.85rem; margin-bottom: 30px; color: var(--accent-color);">
-                誠に勝手ながら 2026年4月20日 までに<br>
-                ご回答いただけますようお願い申し上げます
-            </p>
-            <a href="https://docs.google.com/forms/..." class="rsvp-btn">回答画面へ進む</a>
-        </div>
+        <section class="message-section" id="message">
+            <div class="message-text">
+                謹啓<br><br>
+                木々の緑が深くなる季節<br>
+                皆様におかれましては 益々ご清祥のこととお慶び申し上げます<br>
+                この度 私たちは結婚式を挙げる運びとなりました<br>
+                日頃お世話になっている皆様と 穏やかなひとときを過ごせれば幸いです<br>
+                <div style="color:var(--gold-accent); font-size:0.9rem; margin-top:40px; font-weight:700;">
+                    お手数ですが 2026年4月15日までに<br>
+                    下記「ご出席回答」より回答をお願い申し上げます
+                </div>
+            </div>
+        </section>
 
-        <footer>
-            &copy; 2026 Hirotaka & Sae
-        </footer>
+        <section class="menu-section">
+            <div class="menu-container">
+                <div class="menu-row">
+                    <a href="venue.html" class="btn-minimal">VENUE</a>
+                    <a href="program.html" class="btn-minimal">PROGRAM</a>
+                </div>
+                <div class="menu-row">
+                    <a href="profile.html" class="btn-minimal">PROFILE</a>
+                    <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
+                    <div class="btn-minimal disabled">
+                        <span>MUSIC</span>
+                        <span class="status-tag">当日公開</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rsvp-section">
+            <div style="font-size:0.85rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:25px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
+            <a href="form.html" class="btn-rsvp">ご出席回答</a>
+            <div style="font-size:0.65rem; color:#888; margin-top:10px;">ご出席のお返事はこちらから</div>
+        </section>
+
+        <section class="bottom-section">
+            <div class="news-box">
+                <div class="section-label">WHAT'S NEW</div>
+                <ul class="news-list">
+                    <li class="news-item">
+                        <span class="news-date">2026.04.25</span>
+                        <span class="news-content">GALLERYを公開しました。</span>
+                    </li>
+                    <li class="news-item">
+                        <span class="news-date">2026.01.29</span>
+                        <span class="news-content">WEB招待状を公開しました。</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="faq-box">
+                <div class="section-label">FAQ</div>
+                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
+                <div class="faq-note">※会場の設備・サービスに関する詳細は上記よりご確認いただけます</div>
+            </div>
+        </section>
     </div>
 
+    <script>
+        const passInput = document.getElementById('gate-pass');
+        const unlockBtn = document.getElementById('unlock-btn');
+        const gate = document.getElementById('gate-screen');
+        const main = document.getElementById('main-content');
+
+        function checkGate() {
+            let inputVal = passInput.value.replace(/[０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0)).trim();
+            if (inputVal === '20260516') {
+                localStorage.setItem('wedding_auth_time', new Date().getTime());
+                gate.style.opacity = '0';
+                setTimeout(() => { gate.style.display = 'none'; main.style.display = 'block'; startAnimation(); }, 1000);
+            } else { 
+                document.getElementById('gate-error').style.display = 'block';
+                passInput.value = '';
+            }
+        }
+        unlockBtn.addEventListener('click', checkGate);
+        passInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkGate(); });
+
+        window.onload = () => {
+            const lastLogin = localStorage.getItem('wedding_auth_time');
+            if (lastLogin && (new Date().getTime() - lastLogin < 15 * 60 * 1000)) {
+                gate.style.display = 'none'; main.style.display = 'block'; startAnimation();
+            }
+        };
+
+        function startAnimation() {
+            setTimeout(() => document.querySelector(".hero-right").classList.add("fade-in-active"), 100);
+            setTimeout(() => document.getElementById("main-title").classList.add("fade-in-active"), 100);
+            setTimeout(() => document.getElementById("gold-line").classList.add("show"), 500);
+            setTimeout(() => {
+                const namesBox = document.getElementById("names-box");
+                if (namesBox && namesBox.innerHTML === "") {
+                    let i = 0; const text = "HIROTAKA & SAE";
+                    function type() { 
+                        if(i < text.length) { namesBox.innerHTML += text.charAt(i); i++; setTimeout(type, 100); } 
+                        else { document.getElementById("info-box").classList.add("show"); } 
+                    }
+                    type();
+                }
+            }, 1200);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+            }, { threshold: 0.1 });
+            const msg = document.getElementById('message');
+            if(msg) observer.observe(msg);
+        }
+    </script>
 </body>
 </html>
