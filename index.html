@@ -43,12 +43,10 @@
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
         .hero-right { 
-            flex: 0.67; /* 画面幅の約40%（2/5） */
+            flex: 0.67; /* PC: 画面幅の約40% */
             background: url('web用.JPG') no-repeat; 
             background-size: cover; 
-            /* 修正：上側の空をより映し、下側をカットするために位置を調整 */
-            background-position: center 40%; 
-            /* 左上に角丸を設定 */
+            background-position: center 40%; /* 空を優先 */
             border-radius: 150px 0 0 0; 
             position: relative; 
             z-index: 1;
@@ -57,7 +55,6 @@
         }
         .hero-right.fade-in-active { opacity: 1; }
         
-        /* SCROLL DOWN を画像に被せる */
         .scroll-down { position: absolute; right: 20px; bottom: 40px; z-index: 10; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; text-shadow: 0 0 8px rgba(0,0,0,0.4); }
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
         @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
@@ -74,7 +71,7 @@
         .info-box.show { opacity: 1; transform: translateY(0); }
         .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
 
-        /* --- コンテンツセクション --- */
+        /* --- コンテンツ --- */
         .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
@@ -83,38 +80,34 @@
         .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
         .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
         .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .btn-minimal:hover:not(.disabled) { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
-        .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
-        .status-tag { display: block; letter-spacing: 0.05em; font-weight: 400; margin-top: 5px; color: #888; font-size: 0.6rem; }
-
+        
         .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
         .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
 
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
-        .section-label { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px; font-weight: 700; }
-        
-        .news-box { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
-        .news-list { list-style: none; padding: 0; margin: 0 auto; width: 100%; max-width: 350px; }
-        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center; }
-        .news-date { color: #aaa; font-weight: 700; white-space: nowrap; }
 
-        .faq-box { display: flex; flex-direction: column; align-items: center; }
-        .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
-        .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
-
-        /* --- モバイル対応 --- */
+        /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; height: auto; }
-            .hero-left { padding: 80px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
+            .hero { flex-direction: column; height: 100vh; padding-top: 60px; }
+            .hero-left { 
+                padding: 40px 20px 20px 8%; 
+                flex: 0.55; /* 文字エリアを半分程度に */
+                justify-content: center;
+            }
             .hero-right { 
-                height: 85vh; 
+                flex: 0.45; /* 画像エリアを半分程度に */
                 width: 100%; 
-                flex: none; 
-                border-radius: 80px 0 0 0; 
+                border-radius: 60px 0 0 0; 
                 background-position: center 20%; 
             }
-            .invitation-text { font-size: 2.0rem; }
-            .scroll-down { right: 20px; bottom: 40px; }
+            /* タイトルと情報のサイズをスマホ向けに縮小 */
+            .invitation-text { font-size: 1.6rem; letter-spacing: 0.15em; }
+            .gold-separator { margin: 15px 0; }
+            .names-container { font-size: 0.9rem; }
+            .info-box { margin-top: 15px; }
+            .info-date, .info-venue, .info-time { font-size: 0.7rem; line-height: 1.8; }
+            
+            .scroll-down { right: 15px; bottom: 20px; font-size: 0.6rem; }
         }
     </style>
 </head>
@@ -135,7 +128,7 @@
             <a href="program.html">PROGRAM</a>
             <a href="profile.html">PROFILE</a>
             <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank">GALLERY</a>
-            <a href="#" class="disabled">MUSIC</a>
+            <a href="#" class="disabled" style="opacity:0.5;">MUSIC</a>
             <a href="form.html">ご出席回答</a>
         </nav>
 
@@ -178,9 +171,9 @@
                 <div class="menu-row">
                     <a href="profile.html" class="btn-minimal">PROFILE</a>
                     <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
-                    <div class="btn-minimal disabled">
+                    <div class="btn-minimal" style="opacity:0.6; pointer-events:none;">
                         <span>MUSIC</span>
-                        <span class="status-tag">当日公開</span>
+                        <span style="font-size:0.6rem; font-weight:400;">当日公開</span>
                     </div>
                 </div>
             </div>
@@ -191,20 +184,9 @@
             <a href="form.html" class="btn-rsvp">ご出席回答</a>
         </section>
 
-        <section class="bottom-section">
-            <div class="news-box">
-                <div class="section-label">WHAT'S NEW</div>
-                <ul class="news-list">
-                    <li class="news-item"><span class="news-date">2026.04.25</span>GALLERYを公開しました。</li>
-                    <li class="news-item"><span class="news-date">2026.01.29</span>WEB招待状を公開しました。</li>
-                </ul>
-            </div>
-
-            <div class="faq-box">
-                <div class="section-label">FAQ</div>
-                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
-                <div class="faq-note">※会場の設備・サービスに関する詳細は<br>上記よりご確認いただけます</div>
-            </div>
+        <section class="bottom-section" style="padding-bottom: 100px; text-align: center;">
+            <div style="font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px;">WHAT'S NEW</div>
+            <div style="font-size: 0.75rem; color: #666;">2026.01.29 WEB招待状を公開しました</div>
         </section>
     </div>
 
