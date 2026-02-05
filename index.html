@@ -44,8 +44,8 @@
         .hero-right { 
             flex: 1.2; 
             background: url('web用.JPG') no-repeat; 
-            /* ② ドレスの裾を映すため下部(bottom)を基準に */
-            background-position: center bottom; 
+            /* ① 空が見え、かつドレスの裾が下端に来るよう調整 */
+            background-position: center 20%; 
             background-size: cover; 
             border-radius: 200px 0 0 0; 
             position: relative; 
@@ -104,14 +104,14 @@
         /* FAQ 中央揃え修正 */
         .faq-box { display: flex; flex-direction: column; align-items: center; }
         .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
+        /* ② FAQノートの改行指定を反映 */
         .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
 
         /* --- モバイル最適化 --- */
         @media (max-width: 768px) {
             .hero { flex-direction: column; height: auto; }
             .hero-left { padding: 80px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
-            /* モバイルでも裾が見えるように高さを調整 */
-            .hero-right { height: 70vh; width: 100%; border-radius: 80px 0 0 0; flex: none; }
+            .hero-right { height: 75vh; width: 100%; border-radius: 80px 0 0 0; flex: none; }
             .invitation-text { font-size: 2.2rem; }
             .scroll-down { right: 20px; bottom: 40px; }
 
@@ -215,7 +215,7 @@
             <div class="faq-box">
                 <div class="section-label">FAQ</div>
                 <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
-                <div class="faq-note">※会場の設備・サービスに関する詳細は上記よりご確認いただけます</div>
+                <div class="faq-note">※会場の設備・サービスに関する詳細は<br>上記よりご確認いただけます</div>
             </div>
         </section>
     </div>
@@ -242,7 +242,8 @@
 
         window.onload = () => {
             const lastLogin = localStorage.getItem('wedding_auth_time');
-            if (lastLogin && (new Date().getTime() - lastLogin < 15 * 60 * 1000)) {
+            /* ③ タイムアウトを30分(30*60*1000)に変更 */
+            if (lastLogin && (new Date().getTime() - lastLogin < 30 * 60 * 1000)) {
                 gate.style.display = 'none'; main.style.display = 'block'; startAnimation();
             }
         };
