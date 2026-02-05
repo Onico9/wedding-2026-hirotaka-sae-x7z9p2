@@ -44,8 +44,8 @@
         .hero-right { 
             flex: 1.2; 
             background: url('web用.JPG') no-repeat; 
-            /* ① 空が見え、かつドレスの裾が下端に来るよう調整 */
-            background-position: center 20%; 
+            /* 修正：さらに上（10%）を基準にしてドレスの裾まで表示しやすく */
+            background-position: center 10%; 
             background-size: cover; 
             border-radius: 200px 0 0 0; 
             position: relative; 
@@ -94,24 +94,22 @@
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
         .section-label { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px; font-weight: 700; text-align: center; }
         
-        /* NEWS 中央揃え修正 */
         .news-box { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
         .news-list { list-style: none; padding: 0; margin: 0 auto; width: 100%; max-width: 350px; }
         .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center; }
         .news-date { color: #aaa; font-weight: 700; white-space: nowrap; }
         .news-content { color: #666; text-align: left; }
 
-        /* FAQ 中央揃え修正 */
         .faq-box { display: flex; flex-direction: column; align-items: center; }
         .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
-        /* ② FAQノートの改行指定を反映 */
         .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
 
         /* --- モバイル最適化 --- */
         @media (max-width: 768px) {
             .hero { flex-direction: column; height: auto; }
             .hero-left { padding: 80px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
-            .hero-right { height: 75vh; width: 100%; border-radius: 80px 0 0 0; flex: none; }
+            /* 修正：スマホでドレスをしっかり映すため高さを少しアップ */
+            .hero-right { height: 80vh; width: 100%; border-radius: 80px 0 0 0; flex: none; }
             .invitation-text { font-size: 2.2rem; }
             .scroll-down { right: 20px; bottom: 40px; }
 
@@ -194,8 +192,7 @@
         <section class="rsvp-section">
             <div style="font-size:0.85rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:25px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
             <a href="form.html" class="btn-rsvp">ご出席回答</a>
-            <div style="font-size:0.65rem; color:#888; margin-top:10px;">ご出席のお返事はこちらから</div>
-        </section>
+            </section>
 
         <section class="bottom-section">
             <div class="news-box">
@@ -242,7 +239,6 @@
 
         window.onload = () => {
             const lastLogin = localStorage.getItem('wedding_auth_time');
-            /* ③ タイムアウトを30分(30*60*1000)に変更 */
             if (lastLogin && (new Date().getTime() - lastLogin < 30 * 60 * 1000)) {
                 gate.style.display = 'none'; main.style.display = 'block'; startAnimation();
             }
