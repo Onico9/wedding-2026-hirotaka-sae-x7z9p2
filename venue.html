@@ -6,31 +6,154 @@
     <title>Venue | Wedding Invitation</title>
     <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --main-bg: #f8f7f5; --text-color: #4a4a4a; --sub-text-color: #666; --line-color: #d1d1d1; }
-        body { margin: 0; background: var(--main-bg); color: var(--text-color); font-family: 'Zen Old Mincho', serif; line-height: 1.8; }
-        .container { max-width: 800px; margin: 0 auto; padding: 100px 40px; text-align: center; }
+        :root { 
+            --main-bg: #f8f7f5; 
+            --text-color: #4a4a4a; 
+            --sub-text-color: #666; 
+            --line-color: #d1d1d1; 
+            --accent-color: #c5a059;
+        }
+
+        body { 
+            margin: 0; 
+            color: var(--text-color); 
+            font-family: 'Zen Old Mincho', serif; 
+            line-height: 1.8; 
+            background-color: var(--main-bg);
+            /* 背景画像の設定 */
+            background-image: url('venue_kawabun.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* 画像の上に薄いベールをかけて文字を見やすくする */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(248, 247, 245, 0.7); /* 背景色に合わせた透過 */
+            z-index: -1;
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 100px 20px; 
+            text-align: center; 
+        }
+
+        .page-title { 
+            font-size: 2rem; 
+            letter-spacing: 0.4em; 
+            text-transform: uppercase; 
+            margin-bottom: 60px; 
+            font-weight: 900; 
+            opacity: 0.9; 
+        }
+
+        /* 会場情報エリアの装飾 */
+        .venue-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px); /* 背景を少しぼかして高級感を出す */
+            -webkit-backdrop-filter: blur(5px);
+            padding: 60px 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .venue-name { 
+            font-size: 1.4rem; 
+            letter-spacing: 0.2em; 
+            margin-bottom: 15px; 
+            display: block; 
+            font-weight: 700;
+        }
+
+        .venue-address { 
+            font-size: 0.9rem; 
+            color: var(--sub-text-color); 
+            margin-bottom: 40px; 
+            display: block; 
+            letter-spacing: 0.05em;
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 40px;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
         
-        .page-title { font-size: 2rem; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 80px; font-weight: 900; opacity: 0.8; }
-        .venue-name { font-size: 1.4rem; letter-spacing: 0.2em; margin-bottom: 10px; display: block; }
-        .venue-address { font-size: 0.9rem; color: var(--sub-text-color); margin-bottom: 40px; display: block; }
+        .map-frame { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            filter: grayscale(1) contrast(0.8); /* 地図をモノトーンに */
+        }
+
+        .access-info { 
+            text-align: left; 
+            max-width: 500px; 
+            margin: 0 auto; 
+            font-size: 0.85rem; 
+            color: var(--sub-text-color); 
+            border-left: 1px solid var(--accent-color);
+            padding-left: 20px;
+        }
+
+        .access-info p {
+            margin: 0;
+        }
+
+        .back-link { 
+            display: inline-block; 
+            margin-top: 80px; 
+            text-decoration: none; 
+            color: var(--text-color); 
+            border-bottom: 1px solid var(--line-color); 
+            padding-bottom: 5px; 
+            font-size: 0.8rem; 
+            letter-spacing: 0.2em;
+            transition: opacity 0.3s;
+        }
         
-        .map-frame { width: 100%; height: 400px; background: #eee; border: none; filter: grayscale(1); margin-bottom: 40px; }
-        .access-info { text-align: left; max-width: 500px; margin: 0 auto; font-size: 0.85rem; color: var(--sub-text-color); }
-        .back-link { display: inline-block; margin-top: 80px; text-decoration: none; color: var(--text-color); border-bottom: 1px solid var(--line-color); padding-bottom: 5px; font-size: 0.8rem; letter-spacing: 0.2em; }
+        .back-link:hover {
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 60px 20px; }
+            .venue-card { padding: 40px 20px; }
+            .map-wrapper { height: 300px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="page-title">Venue</h1>
-        <span class="venue-name">THE KAWABUN NAGOYA</span>
-        <span class="venue-address">愛知県名古屋市中区丸の内2-12-30</span>
         
-        <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.2131298455!2d136.8997363!3d35.1761619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60037129532e0e5d%3A0x6338b2585f137682!2zVEhFIEtBV0FCVU4gTkFHT1lB!5e0!3m2!1sja!2sjp!4v1640000000000" allowfullscreen="" loading="lazy"></iframe>
+        <div class="venue-card">
+            <span class="venue-name">THE KAWABUN NAGOYA</span>
+            <span class="venue-address">愛知県名古屋市中区丸の内2-12-30</span>
+            
+            <div class="map-wrapper">
+                <iframe class="map-frame" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3261.427771701389!2d136.8994773152431!3d35.1708499803158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6003713024564c7b%3A0x7d6124578505417!2sTHE%20KAWABUN%20NAGOYA!5e0!3m2!1sja!2sjp!4v1612345678901!5m2!1sja!2sjp" 
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
 
-        <div class="access-info">
-            <p>・地下鉄桜通線・鶴舞線「丸の内」駅 4番出口より徒歩5分<br>
-               ・地下鉄東山線・名城線「栄」駅よりタクシーで約5分</p>
+            <div class="access-info">
+                <p>・地下鉄桜通線・鶴舞線「丸の内」駅 4番出口より徒歩5分</p>
+                <p>・地下鉄東山線・名城線「栄」駅よりタクシーで約5分</p>
+            </div>
         </div>
+
         <a href="index.html" class="back-link">BACK TO TOP</a>
     </div>
 </body>
