@@ -23,7 +23,7 @@
 
         .container { max-width: 800px; margin: 0 auto; padding: 120px 40px; text-align: center; }
 
-        /* ページタイトル（前回仕様） */
+        /* ページタイトル（初期フォント設定） */
         .page-title { 
             font-size: 1.8rem; 
             letter-spacing: 0.5em; 
@@ -33,7 +33,6 @@
             opacity: 0.8; 
         }
 
-        /* プロフィールセクション */
         .profile-section { 
             display: flex;
             flex-direction: column;
@@ -61,7 +60,6 @@
             z-index: 3; cursor: pointer; transition: 0.4s ease;
         }
         .hobby-item img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-        .hobby-item:hover { transform: scale(1.1); }
         
         .hobby-item::after {
             content: attr(data-hobby); position: absolute; top: -30px; left: 50%;
@@ -86,7 +84,6 @@
             margin: 0 auto 60px;
         }
 
-        /* ゲスト紹介（背景なし） */
         .community-container { width: 100%; margin-top: 40px; }
         .community-title { 
             font-size: 1.2rem; 
@@ -118,7 +115,7 @@
             transition: 0.4s;
         }
         
-        /* 外周の日本語テキスト */
+        /* 円の上側に配置するSVG設定 */
         .curved-text-svg { 
             position: absolute; 
             top: 0; left: 0; 
@@ -130,7 +127,7 @@
             font-size: 9px; 
             font-weight: 700; 
             fill: var(--text-color); 
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .community-popup {
@@ -148,7 +145,7 @@
 
         .separator { width: 80px; height: 1px; background: var(--line-color); margin: 100px auto; }
         
-        /* 戻るボタン（前回仕様） */
+        /* 戻るボタン（初期フォント設定） */
         .back-link { 
             display: inline-block; 
             margin-top: 80px; 
@@ -158,6 +155,7 @@
             padding-bottom: 5px; 
             font-size: 0.75rem; 
             letter-spacing: 0.25em;
+            font-weight: 700;
             transition: opacity 0.3s;
         }
         .back-link:hover { opacity: 0.6; }
@@ -166,7 +164,6 @@
             .community-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 15px; }
             .profile-wrapper { width: 280px; height: 280px; }
             .profile-main-img { width: 180px; height: 180px; }
-            .hobby-item { width: 65px; height: 65px; }
         }
     </style>
 </head>
@@ -197,16 +194,25 @@
                             <img src="https://picsum.photos/200/200?random=11" class="community-circle">
                             <div class="community-popup">中学・高校を共に過ごした親友たちです。</div>
                             <svg class="curved-text-svg" viewBox="0 0 100 100">
-                                <path id="gp1" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" />
-                                <text><textPath href="#gp1" startOffset="50%" text-anchor="middle">中高友人</textPath></text>
+                                <path id="curveUp" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" />
+                                <text><textPath href="#curveUp" startOffset="50%" text-anchor="middle">中高友人</textPath></text>
                             </svg>
                         </div>
                     </div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=12" class="community-circle"><div class="community-popup">大学時代の友人。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="gp2" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#gp2" startOffset="50%" text-anchor="middle">大学友人</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=13" class="community-circle"><div class="community-popup">職場の皆様。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="gp3" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#gp3" startOffset="50%" text-anchor="middle">職場の皆様</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=14" class="community-circle"><div class="community-popup">大切な親族。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="gp4" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#gp4" startOffset="50%" text-anchor="middle">親族</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=15" class="community-circle"><div class="community-popup">地元の友人。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="gp5" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#gp5" startOffset="50%" text-anchor="middle">地元の友人</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=16" class="community-circle"><div class="community-popup">趣味の仲間。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="gp6" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#gp6" startOffset="50%" text-anchor="middle">趣味仲間</textPath></text></svg></div></div>
+                    <div class="community-item">
+                        <div class="community-img-outer">
+                            <img src="https://picsum.photos/200/200?random=12" class="community-circle">
+                            <div class="community-popup">大学時代の友人。</div>
+                            <svg class="curved-text-svg" viewBox="0 0 100 100">
+                                <path id="curveUp2" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" />
+                                <text><textPath href="#curveUp2" startOffset="50%" text-anchor="middle">大学友人</textPath></text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=13" class="community-circle"><div class="community-popup">職場の皆様。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="c3" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#c3" startOffset="50%" text-anchor="middle">職場の皆様</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=14" class="community-circle"><div class="community-popup">大切な親族。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="c4" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#c4" startOffset="50%" text-anchor="middle">親族</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=15" class="community-circle"><div class="community-popup">地元の友人。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="c5" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#c5" startOffset="50%" text-anchor="middle">地元の友人</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=16" class="community-circle"><div class="community-popup">趣味の仲間。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="c6" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#c6" startOffset="50%" text-anchor="middle">趣味仲間</textPath></text></svg></div></div>
                 </div>
             </div>
         </section>
@@ -230,12 +236,12 @@
             <div class="community-container">
                 <h3 class="community-title">Guest Introduction</h3>
                 <div class="community-grid">
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=21" class="community-circle"><div class="community-popup">大切な親友。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="bp1" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp1" startOffset="50%" text-anchor="middle">中高友人</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=22" class="community-circle"><div class="community-popup">大学時代の友人。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="bp2" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp2" startOffset="50%" text-anchor="middle">大学友人</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=23" class="community-circle"><div class="community-popup">職場の皆様。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="bp3" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp3" startOffset="50%" text-anchor="middle">職場の皆様</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=24" class="community-circle"><div class="community-popup">大好きな親族。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="bp4" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp4" startOffset="50%" text-anchor="middle">親族</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=25" class="community-circle"><div class="community-popup">ゼミの仲間。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="bp5" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp5" startOffset="50%" text-anchor="middle">大学ゼミ</textPath></text></svg></div></div>
-                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=26" class="community-circle"><div class="community-popup">ダンスの仲間。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="bp6" d="M 10,50 A 40,40 0 1,1 90,50 A 40,40 0 1,1 10,50" fill="none" /><text><textPath href="#bp6" startOffset="50%" text-anchor="middle">ダンス仲間</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=21" class="community-circle"><div class="community-popup">大切な親友。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b1" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#b1" startOffset="50%" text-anchor="middle">中高友人</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=22" class="community-circle"><div class="community-popup">大学時代の友人。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b2" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#b2" startOffset="50%" text-anchor="middle">大学友人</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=23" class="community-circle"><div class="community-popup">職場の皆様。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b3" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#b3" startOffset="50%" text-anchor="middle">職場の皆様</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=24" class="community-circle"><div class="community-popup">大好きな親族。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b4" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#b4" startOffset="50%" text-anchor="middle">親族</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=25" class="community-circle"><div class="community-popup">ゼミの仲間。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b5" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#b5" startOffset="50%" text-anchor="middle">大学ゼミ</textPath></text></svg></div></div>
+                    <div class="community-item"><div class="community-img-outer"><img src="https://picsum.photos/200/200?random=26" class="community-circle"><div class="community-popup">ダンスの仲間。</div><svg class="curved-text-svg" viewBox="0 0 100 100"><path id="b6" d="M 10,50 A 40,40 0 0,1 90,50" fill="none" /><text><textPath href="#b6" startOffset="50%" text-anchor="middle">ダンス仲間</textPath></text></svg></div></div>
                 </div>
             </div>
         </section>
