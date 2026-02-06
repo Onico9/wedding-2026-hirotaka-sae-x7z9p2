@@ -100,21 +100,20 @@
         .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
         .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
 
-        /* --- モバイル対応修正 (ここがスマホのみに適用されるエリア) --- */
+        /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
             .fixed-nav { padding: 0 2%; gap: 8px; }
             .fixed-nav a { font-size: 0.6rem; }
 
             .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; }
-            /* ①：詳細をさらに下げるためのpadding */
             .hero-left { padding: 40px 0 20px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
             
-            /* ①：横幅を3/5 (60%) に変更 / ②：Rを日付の高さまで深くかける */
+            /* ①：横幅を70%へ拡大 / 縁のカット（角丸）をさらに深く調整 */
             .hero-right { 
                 height: 55vh; 
-                width: 60%; 
+                width: 70%; 
                 flex: none; 
-                border-radius: 200px 0 0 0; 
+                border-radius: 240px 0 0 0; 
                 margin-top: 0px;
                 background-position: center 20%; 
             }
@@ -122,7 +121,6 @@
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
             .gold-separator { margin: 10px 0; }
             .names-container { font-size: 1.0rem; }
-            /* ①：詳細情報を下げる */
             .info-box { margin-top: 20px; }
 
             .info-time span { display: block; line-height: 1.4; }
@@ -130,9 +128,9 @@
             
             .scroll-down { right: 15px; bottom: 30px; font-size: 0.6rem; }
 
-            /* ③：メニューの左端をINVITATIONの左（7%）と揃える */
+            /* ③：メニューの左端を hero-left の 7% と完全に揃える */
             .menu-container { padding: 0 7%; }
-            .menu-row { justify-content: flex-start; gap: 20px; }
+            .menu-row { justify-content: flex-start; gap: 15px; }
         }
     </style>
 </head>
