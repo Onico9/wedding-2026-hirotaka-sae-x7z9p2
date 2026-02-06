@@ -102,18 +102,23 @@
 
         /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            .fixed-nav { padding: 0 2%; gap: 8px; }
+            /* ②：メニュータブの左寄せと間隔修正 */
+            .fixed-nav { 
+                padding: 0 7%; 
+                gap: 12px; 
+                justify-content: flex-start; 
+            }
             .fixed-nav a { font-size: 0.6rem; }
 
             .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; }
             .hero-left { padding: 40px 0 20px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
             
-            /* ①：横幅を70%へ拡大 / 縁のカット（角丸）をさらに深く調整 */
+            /* ①：画像を赤ラインまで拡大（85%）し、角丸を深く調整 */
             .hero-right { 
                 height: 55vh; 
-                width: 70%; 
+                width: 85%; 
                 flex: none; 
-                border-radius: 240px 0 0 0; 
+                border-radius: 350px 0 0 0; 
                 margin-top: 0px;
                 background-position: center 20%; 
             }
@@ -128,7 +133,7 @@
             
             .scroll-down { right: 15px; bottom: 30px; font-size: 0.6rem; }
 
-            /* ③：メニューの左端を hero-left の 7% と完全に揃える */
+            /* メニューの左端を揃える */
             .menu-container { padding: 0 7%; }
             .menu-row { justify-content: flex-start; gap: 15px; }
         }
