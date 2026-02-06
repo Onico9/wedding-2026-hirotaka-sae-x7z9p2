@@ -34,20 +34,21 @@
         body, html { margin: 0; padding: 0; background: var(--main-bg); color: var(--text-color); font-family: 'Zen Old Mincho', serif; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
 
         /* --- ナビゲーション --- */
-        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding: 0 4%; gap: 12px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
-        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.65rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
-        .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.5; pointer-events: none; }
+        .fixed-nav { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(248, 247, 245, 0.98); display: flex; justify-content: flex-end; align-items: center; padding: 0 4%; gap: 15px; z-index: 100; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
+        .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.7; pointer-events: none; }
 
-        /* --- ヒーローエリア --- */
+        /* --- ヒーローエリア（曲線カット版） --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
         .hero-right { 
-            flex: 0.67; 
+            flex: 1.2; 
             background: url('web用.JPG') no-repeat; 
             background-size: cover; 
-            background-position: center 40%; 
-            border-radius: 150px 0 0 0; 
+            background-position: center center; 
+            /* 楕円のクリップパスで優雅な曲線を表現 */
+            clip-path: ellipse(90% 100% at 100% 50%);
             position: relative; 
             z-index: 1;
             opacity: 0;
@@ -57,53 +58,66 @@
         
         .scroll-down { position: absolute; right: 20px; bottom: 40px; z-index: 10; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; text-shadow: 0 0 8px rgba(0,0,0,0.4); }
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
-        
-        .invitation-text { font-weight: 900; font-size: clamp(1.8rem, 5vw, 3.0rem); margin: 0; line-height: 1.1; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
+        @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+        .invitation-text { font-weight: 900; font-size: clamp(1.8rem, 5vw, 3.0rem); margin: 0; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
         .invitation-text.fade-in-active { opacity: 1; }
         .invitation-text span { display: block; }
 
-        .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 20px 0; transition: width 2s ease; }
-        .gold-separator.show { width: 80px; }
+        .gold-separator { width: 0; height: 1px; background: linear-gradient(90deg, #c5a059, #e9d0a5, #c5a059); margin: 25px 0; transition: width 2s ease; }
+        .gold-separator.show { width: 100px; }
 
-        .names-container { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3em; color: #666; min-height: 1.2em; }
-        .info-box { margin-top: 20px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
+        .names-container { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3em; color: #666; min-height: 1.5em; }
+        .info-box { margin-top: 25px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
         .info-box.show { opacity: 1; transform: translateY(0); }
-        .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.15em; color: #666; line-height: 1.8; }
-        .info-time { display: flex; gap: 10px; }
+        .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
 
-        /* --- モバイル対応修正 --- */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; height: 100vh; }
-            .hero-left { 
-                padding: 10px 20px 20px 8%; 
-                flex: 0; /* 中身のサイズに合わせる */
-                justify-content: flex-start; /* 上に詰める */
-            }
-            .hero-right { 
-                flex: 1; /* 残りの画面をすべて画像に */
-                width: 100%; 
-                border-radius: 50px 0 0 0; 
-                background-position: center bottom; /* 裾を優先 */
-            }
-            .invitation-text { font-size: 1.4rem; }
-            .gold-separator { margin: 10px 0; }
-            .names-container { font-size: 0.85rem; }
-            .info-box { margin-top: 10px; }
-            .info-date, .info-venue, .info-time { font-size: 0.65rem; line-height: 1.5; }
-            
-            /* 時刻を二段にする設定 */
-            .info-time { flex-direction: column; gap: 2px; }
-            .info-time span::after { content: none; }
-
-            .scroll-down { right: 15px; bottom: 20px; font-size: 0.55rem; }
-        }
-
-        /* --- コンテンツセクション --- */
-        .message-section { padding: 80px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
+        /* --- メッセージセクション --- */
+        .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
-        .message-text { max-width: 600px; margin: 0 auto; line-height: 2.5; letter-spacing: 0.05em; font-size: 0.95rem; }
-        .rsvp-section { background-color: var(--soft-gold); padding: 60px 30px; text-align: center; margin-bottom: 50px; }
-        .btn-rsvp { width: 220px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 15px 0; text-decoration: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em; display: inline-block; }
+        .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
+
+        /* --- メニュータブ --- */
+        .menu-section { padding: 40px 0 20px; }
+        .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+        .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
+        .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .btn-minimal:hover:not(.disabled) { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
+        .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
+        .status-tag { display: block; letter-spacing: 0.05em; font-weight: 400; margin-top: 5px; color: #888; font-size: 0.6rem; }
+
+        /* --- RSVP --- */
+        .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
+        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
+        .btn-rsvp:hover { background: var(--gold-accent); color: #fff; }
+
+        /* --- 下部セクション (News & FAQ) --- */
+        .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
+        .section-label { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px; font-weight: 700; }
+        
+        .news-box { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
+        .news-list { list-style: none; padding: 0; margin: 0 auto; width: 100%; max-width: 350px; }
+        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center; }
+        .news-date { color: #aaa; font-weight: 700; white-space: nowrap; }
+
+        .faq-box { display: flex; flex-direction: column; align-items: center; }
+        .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
+        .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
+
+        /* --- モバイル対応 --- */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; height: auto; min-height: 100vh; }
+            .hero-left { padding: 100px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
+            .hero-right { 
+                height: 70vh; 
+                width: 100%; 
+                flex: none; 
+                clip-path: ellipse(150% 100% at 100% 100%); /* モバイル用の大きなカーブ */
+                background-position: center top; 
+            }
+            .invitation-text { font-size: 2.0rem; }
+            .scroll-down { right: 20px; bottom: 40px; }
+        }
     </style>
 </head>
 <body>
@@ -135,10 +149,7 @@
                 <div id="info-box" class="info-box">
                     <span class="info-date">2026.5.16.SAT</span>
                     <span class="info-venue">the kawabun nagoya</span>
-                    <div class="info-time">
-                        <span>13:30 Reception</span>
-                        <span>14:00 Ceremony</span>
-                    </div>
+                    <span class="info-time">13:30 Reception / 14:00 Ceremony</span>
                 </div>
             </div>
             <div class="hero-right">
@@ -153,16 +164,49 @@
                 皆様におかれましては 益々ご清祥のこととお慶び申し上げます<br>
                 この度 私たちは結婚式を挙げる運びとなりました<br>
                 日頃お世話になっている皆様と 穏やかなひとときを過ごせれば幸いです<br>
-                <div style="color:var(--gold-accent); font-size:0.85rem; margin-top:30px; font-weight:700;">
+                <div style="color:var(--gold-accent); font-size:0.9rem; margin-top:40px; font-weight:700;">
                     お手数ですが 2026年4月15日までに<br>
                     下記「ご出席回答」より回答をお願い申し上げます
                 </div>
             </div>
         </section>
 
+        <section class="menu-section">
+            <div class="menu-container">
+                <div class="menu-row">
+                    <a href="venue.html" class="btn-minimal">VENUE</a>
+                    <a href="program.html" class="btn-minimal">PROGRAM</a>
+                </div>
+                <div class="menu-row">
+                    <a href="profile.html" class="btn-minimal">PROFILE</a>
+                    <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
+                    <div class="btn-minimal disabled">
+                        <span>MUSIC</span>
+                        <span class="status-tag">当日公開</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="rsvp-section">
-            <div style="font-size:0.75rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:20px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
+            <div style="font-size:0.85rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:25px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
             <a href="form.html" class="btn-rsvp">ご出席回答</a>
+        </section>
+
+        <section class="bottom-section">
+            <div class="news-box">
+                <div class="section-label">WHAT'S NEW</div>
+                <ul class="news-list">
+                    <li class="news-item"><span class="news-date">2026.04.25</span>GALLERYを公開しました。</li>
+                    <li class="news-item"><span class="news-date">2026.01.29</span>WEB招待状を公開しました。</li>
+                </ul>
+            </div>
+
+            <div class="faq-box">
+                <div class="section-label">FAQ</div>
+                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
+                <div class="faq-note">※会場の設備・サービスに関する詳細は<br>上記よりご確認いただけます</div>
+            </div>
         </section>
     </div>
 
