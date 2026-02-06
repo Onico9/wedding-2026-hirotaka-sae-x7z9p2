@@ -70,55 +70,62 @@
         .info-box { margin-top: 25px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
         .info-box.show { opacity: 1; transform: translateY(0); }
         .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
-        .info-time .slash { display: inline; }
+        .info-time span { display: inline; }
 
         /* --- コンテンツセクション --- */
         .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
 
-        /* --- モバイル対応修正箇所 --- */
-        @media (max-width: 768px) {
-            .fixed-nav { 
-                padding: 0 2%; 
-                gap: 8px; /* 項目間の幅を狭める */
-            }
-            .fixed-nav a { 
-                font-size: 0.6rem; /* フォントサイズを下げて見切れ防止 */
-            }
+        .menu-section { padding: 60px 0 20px; }
+        .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+        .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
+        .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .btn-minimal:hover:not(.disabled) { color: var(--gold-accent); border-bottom: 1px solid var(--gold-accent); }
+        .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
+        .status-tag { display: block; letter-spacing: 0.05em; font-weight: 400; margin-top: 5px; color: #888; font-size: 0.6rem; }
 
-            .hero { 
-                flex-direction: column; 
-                height: 100vh;
-                justify-content: flex-start;
-                align-items: flex-end; 
-                padding-top: 60px;
-            }
-            .hero-left { 
-                padding: 10px 0 10px 7%; /* 余白を少しだけ狭く調整 */
-                flex: none; 
-                width: 100%; 
-                justify-content: flex-start;
-                background: none;
-                box-sizing: border-box;
-            }
+        .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
+        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
+
+        .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
+        .section-label { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px; font-weight: 700; }
+        
+        .news-box { margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
+        .news-list { list-style: none; padding: 0; margin: 0 auto; width: 100%; max-width: 350px; }
+        .news-item { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center; }
+        .news-date { color: #aaa; font-weight: 700; white-space: nowrap; }
+
+        .faq-box { display: flex; flex-direction: column; align-items: center; }
+        .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
+        .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
+
+        /* --- モバイル対応修正 --- */
+        @media (max-width: 768px) {
+            .fixed-nav { padding: 0 2%; gap: 8px; }
+            .fixed-nav a { font-size: 0.6rem; }
+
+            .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; }
+            .hero-left { padding: 10px 0 10px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
+            
             .hero-right { 
                 height: 58vh; 
                 width: 85%; 
                 flex: none; 
-                /* the kawabun nagoya の高さ付近でカーブが終わるように調整 */
-                border-radius: 120px 0 0 0; 
-                margin-top: -10px; 
+                border-radius: 120px 0 0 0; /* the kawabun nagoyaと同じ高さで終わる設定 */
+                margin-top: -10px;
+                background-position: center 20%; 
             }
+            
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
             .gold-separator { margin: 10px 0; }
             .names-container { font-size: 1.0rem; }
             .info-box { margin-top: 10px; }
-            
+
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
-            .scroll-down { right: 15px; bottom: 20px; font-size: 0.6rem; }
+            .scroll-down { right: 15px; bottom: 30px; font-size: 0.6rem; }
         }
     </style>
 </head>
@@ -152,9 +159,7 @@
                     <span class="info-date">2026.5.16.SAT</span>
                     <span class="info-venue">the kawabun nagoya</span>
                     <span class="info-time">
-                        <span>13:30 Reception</span>
-                        <span class="slash"> / </span>
-                        <span>14:00 Ceremony</span>
+                        <span>13:30 Reception</span><span class="slash"> / </span><span>14:00 Ceremony</span>
                     </span>
                 </div>
             </div>
@@ -168,7 +173,50 @@
                 謹啓<br><br>
                 木々の緑が深くなる季節<br>
                 皆様におかれましては 益々ご清祥のこととお慶び申し上げます<br>
-                この度 私たちは結婚式を挙げる運びとなりました
+                この度 私たちは結婚式を挙げる運びとなりました<br>
+                日頃お世話になっている皆様と 穏やかなひとときを過ごせれば幸いです<br>
+                <div style="color:var(--gold-accent); font-size:0.9rem; margin-top:40px; font-weight:700;">
+                    お手数ですが 2026年4月15日までに<br>
+                    下記「ご出席回答」より回答をお願い申し上げます
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section">
+            <div class="menu-container">
+                <div class="menu-row">
+                    <a href="venue.html" class="btn-minimal">VENUE</a>
+                    <a href="program.html" class="btn-minimal">PROGRAM</a>
+                </div>
+                <div class="menu-row">
+                    <a href="profile.html" class="btn-minimal">PROFILE</a>
+                    <a href="https://script.google.com/macros/s/AKfycbwURwZ7jNvhN43lLo9UUVhsXghW6AHTJc4Bn9_gG-1jNvQ9jEDX6GWCX2AVPSIk-B55qg/exec" target="_blank" class="btn-minimal">GALLERY</a>
+                    <div class="btn-minimal disabled">
+                        <span>MUSIC</span>
+                        <span class="status-tag">当日公開</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rsvp-section">
+            <div style="font-size:0.85rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:25px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
+            <a href="form.html" class="btn-rsvp">ご出席回答</a>
+        </section>
+
+        <section class="bottom-section">
+            <div class="news-box">
+                <div class="section-label">WHAT'S NEW</div>
+                <ul class="news-list">
+                    <li class="news-item"><span class="news-date">2026.04.25</span>GALLERYを公開しました。</li>
+                    <li class="news-item"><span class="news-date">2026.01.29</span>WEB招待状を公開しました。</li>
+                </ul>
+            </div>
+
+            <div class="faq-box">
+                <div class="section-label">FAQ</div>
+                <a href="https://www.thekawabunnagoya.com/thekawabunnagoya/wedding/assembled/" target="_blank" rel="noopener" class="faq-link">THE KAWABUN NAGOYA 公式FAQ</a>
+                <div class="faq-note">※会場の設備・サービスに関する詳細は<br>上記よりご確認いただけます</div>
             </div>
         </section>
     </div>
