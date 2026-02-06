@@ -79,6 +79,14 @@
 
         /* --- モバイル対応修正箇所 --- */
         @media (max-width: 768px) {
+            .fixed-nav { 
+                padding: 0 2%; 
+                gap: 8px; /* 項目間の幅を狭める */
+            }
+            .fixed-nav a { 
+                font-size: 0.6rem; /* フォントサイズを下げて見切れ防止 */
+            }
+
             .hero { 
                 flex-direction: column; 
                 height: 100vh;
@@ -87,7 +95,7 @@
                 padding-top: 60px;
             }
             .hero-left { 
-                padding: 10px 0 10px 10%; /* 左側にしっかり余白を設ける */
+                padding: 10px 0 10px 7%; /* 余白を少しだけ狭く調整 */
                 flex: none; 
                 width: 100%; 
                 justify-content: flex-start;
@@ -95,12 +103,12 @@
                 box-sizing: border-box;
             }
             .hero-right { 
-                height: 58vh; /* 高さを微調整 */
-                width: 85%; /* 少し幅を広げてゆとりを */
+                height: 58vh; 
+                width: 85%; 
                 flex: none; 
-                /* names-boxと同じ高さで直線から始まり、緩やかにRがかかる設定 */
-                border-radius: 180px 0 0 0; 
-                margin-top: -25px; /* HIROTAKA & SAE の位置に近づける */
+                /* the kawabun nagoya の高さ付近でカーブが終わるように調整 */
+                border-radius: 120px 0 0 0; 
+                margin-top: -10px; 
             }
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
             .gold-separator { margin: 10px 0; }
