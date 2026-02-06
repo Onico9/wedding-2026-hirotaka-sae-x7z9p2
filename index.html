@@ -38,17 +38,16 @@
         .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
         .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.7; pointer-events: none; }
 
-        /* --- ヒーローエリア（曲線カット版） --- */
+        /* --- ヒーローエリア --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
         .hero-right { 
-            flex: 1.2; 
+            flex: 0.67; 
             background: url('web用.JPG') no-repeat; 
             background-size: cover; 
-            background-position: center center; 
-            /* 楕円のクリップパスで優雅な曲線を表現 */
-            clip-path: ellipse(90% 100% at 100% 50%);
+            background-position: center 40%; 
+            border-radius: 150px 0 0 0; /* PC版の角丸 */
             position: relative; 
             z-index: 1;
             opacity: 0;
@@ -71,14 +70,14 @@
         .info-box { margin-top: 25px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
         .info-box.show { opacity: 1; transform: translateY(0); }
         .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.2em; color: #666; line-height: 2; }
+        .info-time span { display: inline; } /* デフォルトは横並び */
 
-        /* --- メッセージセクション --- */
+        /* --- コンテンツセクション --- */
         .message-section { padding: 120px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
 
-        /* --- メニュータブ --- */
-        .menu-section { padding: 40px 0 20px; }
+        .menu-section { padding: 60px 0 20px; }
         .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
         .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
         .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -86,12 +85,9 @@
         .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
         .status-tag { display: block; letter-spacing: 0.05em; font-weight: 400; margin-top: 5px; color: #888; font-size: 0.6rem; }
 
-        /* --- RSVP --- */
         .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
         .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
-        .btn-rsvp:hover { background: var(--gold-accent); color: #fff; }
 
-        /* --- 下部セクション (News & FAQ) --- */
         .bottom-section { max-width: 600px; margin: 0 auto 100px; padding: 0 30px; text-align: center; }
         .section-label { font-size: 0.8rem; letter-spacing: 0.2em; color: #888; margin-bottom: 25px; font-weight: 700; }
         
@@ -104,19 +100,26 @@
         .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
         .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
 
-        /* --- モバイル対応 --- */
+        /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; height: auto; min-height: 100vh; }
-            .hero-left { padding: 100px 30px 40px; flex: none; width: 100%; box-sizing: border-box; }
+            .hero { flex-direction: column; height: auto; align-items: flex-end; } /* 右寄せの準備 */
+            .hero-left { padding: 80px 30px 20px; flex: none; width: 100%; box-sizing: border-box; }
+            
+            /* 画像の横幅を4/5(80%)にし、左上のみ丸める */
             .hero-right { 
                 height: 70vh; 
-                width: 100%; 
+                width: 80%; 
                 flex: none; 
-                clip-path: ellipse(150% 100% at 100% 100%); /* モバイル用の大きなカーブ */
-                background-position: center top; 
+                border-radius: 80px 0 0 0; 
+                background-position: center 20%; 
             }
+            
             .invitation-text { font-size: 2.0rem; }
-            .scroll-down { right: 20px; bottom: 40px; }
+            
+            /* 時間を2行に変更 */
+            .info-time span { display: block; line-height: 1.6; }
+            
+            .scroll-down { right: 15px; bottom: 30px; }
         }
     </style>
 </head>
@@ -149,7 +152,9 @@
                 <div id="info-box" class="info-box">
                     <span class="info-date">2026.5.16.SAT</span>
                     <span class="info-venue">the kawabun nagoya</span>
-                    <span class="info-time">13:30 Reception / 14:00 Ceremony</span>
+                    <span class="info-time">
+                        <span>13:30 Reception</span> / <span>14:00 Ceremony</span>
+                    </span>
                 </div>
             </div>
             <div class="hero-right">
