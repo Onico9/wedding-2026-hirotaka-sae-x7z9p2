@@ -40,8 +40,6 @@
 
         /* --- ヒーローエリア --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
-        
-        /* PC用レイアウト：中央寄せ */
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
         .hero-right { 
@@ -59,8 +57,7 @@
         
         .scroll-down { position: absolute; right: 20px; bottom: 40px; z-index: 10; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; text-shadow: 0 0 8px rgba(0,0,0,0.4); }
         .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
-        @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
-
+        
         .invitation-text { font-weight: 900; font-size: clamp(1.8rem, 5vw, 3.0rem); margin: 0; line-height: 1.1; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
         .invitation-text.fade-in-active { opacity: 1; }
         .invitation-text span { display: block; }
@@ -72,37 +69,41 @@
         .info-box { margin-top: 20px; opacity: 0; transition: 2s ease; transform: translateY(10px); }
         .info-box.show { opacity: 1; transform: translateY(0); }
         .info-date, .info-venue, .info-time { display: block; font-size: 0.8rem; letter-spacing: 0.15em; color: #666; line-height: 1.8; }
+        .info-time { display: flex; gap: 10px; }
 
         /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            .hero { flex-direction: column; height: 100vh; padding-top: 60px; }
+            .hero { flex-direction: column; height: 100vh; }
             .hero-left { 
-                padding: 15px 20px 0 8%; /* 上の余白を最小限に */
-                flex: none;
-                height: 42vh; /* 文字の高さを固定し、画像エリアを確保 */
-                justify-content: flex-start; /* メニューバーのすぐ下に配置 */
+                padding: 10px 20px 20px 8%; 
+                flex: 0; /* 中身のサイズに合わせる */
+                justify-content: flex-start; /* 上に詰める */
             }
             .hero-right { 
-                flex: 1; /* 残りの全エリアを画像に */
+                flex: 1; /* 残りの画面をすべて画像に */
                 width: 100%; 
                 border-radius: 50px 0 0 0; 
-                background-position: center bottom; /* 裾を優先的に表示 */
-                background-size: cover;
+                background-position: center bottom; /* 裾を優先 */
             }
-            .invitation-text { font-size: 1.3rem; margin-top: 10px; } /* さらにサイズダウンして上詰め */
-            .gold-separator { margin: 8px 0; }
-            .names-container { font-size: 0.8rem; }
-            .info-box { margin-top: 8px; }
+            .invitation-text { font-size: 1.4rem; }
+            .gold-separator { margin: 10px 0; }
+            .names-container { font-size: 0.85rem; }
+            .info-box { margin-top: 10px; }
             .info-date, .info-venue, .info-time { font-size: 0.65rem; line-height: 1.5; }
             
-            .scroll-down { right: 15px; bottom: 20px; font-size: 0.5rem; }
-            .scroll-down::after { height: 30px; bottom: -40px; }
+            /* 時刻を二段にする設定 */
+            .info-time { flex-direction: column; gap: 2px; }
+            .info-time span::after { content: none; }
+
+            .scroll-down { right: 15px; bottom: 20px; font-size: 0.55rem; }
         }
 
-        /* --- コンテンツ --- */
+        /* --- コンテンツセクション --- */
         .message-section { padding: 80px 30px; text-align: center; opacity: 0; transform: translateY(30px); transition: 1.5s ease; }
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.5; letter-spacing: 0.05em; font-size: 0.95rem; }
+        .rsvp-section { background-color: var(--soft-gold); padding: 60px 30px; text-align: center; margin-bottom: 50px; }
+        .btn-rsvp { width: 220px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 15px 0; text-decoration: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em; display: inline-block; }
     </style>
 </head>
 <body>
@@ -134,7 +135,10 @@
                 <div id="info-box" class="info-box">
                     <span class="info-date">2026.5.16.SAT</span>
                     <span class="info-venue">the kawabun nagoya</span>
-                    <span class="info-time">13:30 Reception / 14:00 Ceremony</span>
+                    <div class="info-time">
+                        <span>13:30 Reception</span>
+                        <span>14:00 Ceremony</span>
+                    </div>
                 </div>
             </div>
             <div class="hero-right">
@@ -154,6 +158,11 @@
                     下記「ご出席回答」より回答をお願い申し上げます
                 </div>
             </div>
+        </section>
+
+        <section class="rsvp-section">
+            <div style="font-size:0.75rem; color:var(--gold-accent); letter-spacing:0.15em; margin-bottom:20px; font-weight:700;">PLEASE REPLY BY 2026.04.15</div>
+            <a href="form.html" class="btn-rsvp">ご出席回答</a>
         </section>
     </div>
 
