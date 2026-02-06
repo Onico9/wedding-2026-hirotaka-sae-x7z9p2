@@ -110,13 +110,13 @@
                 flex-direction: column; 
                 height: 100vh; 
                 align-items: flex-end; 
-                padding-top: 60px; 
+                padding-top: 50px; /* 上部余白を少し詰める */
                 overflow: hidden; 
                 display: flex;
             }
             
             .hero-left { 
-                padding: 30px 0 10px 7%; 
+                padding: 20px 0 5px 7%; /* 余白を最小限に */
                 flex: none; 
                 width: 100%; 
                 box-sizing: border-box; 
@@ -125,40 +125,39 @@
             }
             
             .hero-right { 
-                height: calc(100vh - 150px); 
-                width: 80%; 
+                height: calc(100vh - 120px); /* 画像の高さをより大きく確保 */
+                width: 85%; 
                 flex: 1; 
-                border-radius: 190px 0 0 0; 
-                margin-top: -30px; 
-                background-position: center 45%; 
+                border-radius: 180px 0 0 0; 
+                margin-top: -60px; /* テキスト領域に大きく食い込ませて余白を詰める */
+                background-position: center 20%; 
                 position: relative;
                 z-index: 1;
             }
             
-            .invitation-text { font-size: 1.8rem; margin-top: 5px; }
-            .gold-separator { margin: 10px 0; }
+            .invitation-text { font-size: 1.8rem; margin-top: 0; }
+            .gold-separator { margin: 8px 0; }
             .names-container { font-size: 1.0rem; }
-            .info-box { margin-top: 15px; }
+            .info-box { margin-top: 10px; }
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
-            /* モバイル用SCROLL DOWN：白に変更＋影で視認性向上 */
             .scroll-down { 
-                right: 15px; 
-                bottom: 30px; 
-                font-size: 0.5rem; 
+                right: 20px; 
+                bottom: 80px; 
+                font-size: 0.6rem; 
                 z-index: 100;
                 color: #fff; 
-                text-shadow: 0 0 8px rgba(0,0,0,0.6); /* 影を少し強くして白い空と差別化 */
+                text-shadow: 0 0 8px rgba(0,0,0,0.6);
             }
             
             .scroll-down::after {
                 content: "";
                 position: absolute;
-                bottom: -30px;
+                bottom: -50px;
                 left: 50%;
                 width: 1px;
-                height: 20px;
+                height: 40px;
                 background: #fff; 
                 animation: scrollLine 2s infinite;
                 box-shadow: 0 0 4px rgba(0,0,0,0.4);
