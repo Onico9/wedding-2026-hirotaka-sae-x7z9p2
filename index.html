@@ -113,12 +113,12 @@
             .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; }
             .hero-left { padding: 40px 0 20px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
             
-            /* ①：画像を赤ラインまで拡大（85%）し、角丸を深く調整 */
+            /* ①：画像幅は85%を維持、カーブ（border-radius）のみ浅めに戻す */
             .hero-right { 
                 height: 55vh; 
                 width: 85%; 
                 flex: none; 
-                border-radius: 350px 0 0 0; 
+                border-radius: 240px 0 0 0; /* ここを元の240pxに戻しました */
                 margin-top: 0px;
                 background-position: center 20%; 
             }
