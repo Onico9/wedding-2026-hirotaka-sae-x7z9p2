@@ -125,12 +125,12 @@
             }
             
             .hero-right { 
-                height: calc(100vh - 200px); /* 高さをしっかり確保 */
+                height: calc(100vh - 200px); 
                 width: 85%; 
                 flex: 1; 
                 border-radius: 180px 0 0 0; 
                 margin-top: -20px; 
-                background-position: center 40%; /* 人物の見切れを防ぐために位置を調整 */
+                background-position: center 20%; 
                 position: relative;
                 z-index: 1;
             }
@@ -142,14 +142,14 @@
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
-            /* モバイル用SCROLL DOWNの調整 */
+            /* モバイル用SCROLL DOWN：白に変更＋影で視認性向上 */
             .scroll-down { 
                 right: 20px; 
-                bottom: 60px; /* 画面下部から少し上に配置 */
+                bottom: 90px; 
                 font-size: 0.6rem; 
                 z-index: 100;
-                color: var(--gold-accent); /* 白い空と同化しないようゴールドに変更 */
-                text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+                color: #fff; 
+                text-shadow: 0 0 8px rgba(0,0,0,0.6); /* 影を少し強くして白い空と差別化 */
             }
             
             .scroll-down::after {
@@ -159,9 +159,9 @@
                 left: 50%;
                 width: 1px;
                 height: 40px;
-                background: var(--gold-accent); /* 線の色もゴールドに */
+                background: #fff; 
                 animation: scrollLine 2s infinite;
-                box-shadow: none;
+                box-shadow: 0 0 4px rgba(0,0,0,0.4);
             }
 
             .menu-container { padding: 0 7%; }
