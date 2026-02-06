@@ -77,45 +77,36 @@
         .message-section.is-visible { opacity: 1; transform: translateY(0); }
         .message-text { max-width: 600px; margin: 0 auto; line-height: 2.8; letter-spacing: 0.1em; font-size: 1rem; }
 
-        /* --- RSVP等 --- */
-        .menu-section { padding: 60px 0 20px; }
-        .menu-container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
-        .menu-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
-        .btn-minimal { flex: 1; text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; padding: 25px 0; font-size: 0.8rem; letter-spacing: 0.3em; text-align: center; transition: 0.3s; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .btn-minimal.disabled { color: var(--charcoal-gray); opacity: 0.6; pointer-events: none; }
-
-        .rsvp-section { background-color: var(--soft-gold); padding: 80px 30px; margin: 60px 0 80px; text-align: center; }
-        .btn-rsvp { width: 260px; background: #fff; border: 1px solid var(--gold-accent); color: var(--gold-accent); padding: 18px 0; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.3em; display: inline-block; transition: 0.3s; }
-
         /* --- モバイル対応修正箇所 --- */
         @media (max-width: 768px) {
             .hero { 
                 flex-direction: column; 
-                height: 100vh; /* 画面に収める */
+                height: 100vh;
                 justify-content: flex-start;
                 align-items: flex-end; 
-                padding-top: 60px; /* メニューの高さ分 */
+                padding-top: 60px;
             }
             .hero-left { 
-                padding: 10px 0 10px 30px; /* 余白を大幅に削る */
+                padding: 10px 0 10px 10%; /* 左側にしっかり余白を設ける */
                 flex: none; 
                 width: 100%; 
                 justify-content: flex-start;
                 background: none;
+                box-sizing: border-box;
             }
             .hero-right { 
-                height: 55vh; /* 画像の高さを調整してスクロール不要に */
-                width: 80%; 
+                height: 58vh; /* 高さを微調整 */
+                width: 85%; /* 少し幅を広げてゆとりを */
                 flex: none; 
-                border-radius: 120px 0 0 0; /* Rカット */
-                margin-top: -10px; /* テキストとの距離を詰める */
+                /* names-boxと同じ高さで直線から始まり、緩やかにRがかかる設定 */
+                border-radius: 180px 0 0 0; 
+                margin-top: -25px; /* HIROTAKA & SAE の位置に近づける */
             }
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
             .gold-separator { margin: 10px 0; }
             .names-container { font-size: 1.0rem; }
             .info-box { margin-top: 10px; }
             
-            /* スラッシュを非表示にして2行にする */
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
