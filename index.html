@@ -55,8 +55,9 @@
         }
         .hero-right.fade-in-active { opacity: 1; }
         
+        /* SCROLL DOWN 共通設定 */
         .scroll-down { position: absolute; right: 20px; bottom: 40px; z-index: 10; writing-mode: vertical-rl; font-size: 0.65rem; letter-spacing: 0.2em; color: #fff; text-decoration: none; text-shadow: 0 0 8px rgba(0,0,0,0.4); }
-        .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; }
+        .scroll-down::after { content: ""; position: absolute; bottom: -60px; left: 50%; width: 1px; height: 50px; background: #fff; animation: scrollLine 2s infinite; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
         @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
         .invitation-text { font-weight: 900; font-size: clamp(1.8rem, 5vw, 3.0rem); margin: 0; line-height: 1.2; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 2.5s ease; }
@@ -102,38 +103,18 @@
 
         /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            .fixed-nav { 
-                padding: 0 7%; 
-                gap: 12px; 
-                justify-content: flex-start; 
-            }
+            .fixed-nav { padding: 0 7%; gap: 12px; justify-content: flex-start; }
             .fixed-nav a { font-size: 0.6rem; }
 
-            .hero { 
-                flex-direction: column; 
-                height: 100vh; 
-                align-items: flex-end; 
-                padding-top: 60px; 
-                overflow: hidden; 
-            }
-
-            /* 文字エリアの下の余白を最小化して画像に近づける */
-            .hero-left { 
-                padding: 40px 0 0px 7%; 
-                flex: none; 
-                width: 100%; 
-                box-sizing: border-box; 
-                justify-content: flex-start; 
-                background: none; 
-            }
+            .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; overflow: hidden; }
+            .hero-left { padding: 40px 0 0px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
             
-            /* 画像エリア：高さを出しつつマイナスマージンで文字へ近づける */
             .hero-right { 
                 height: 85vh; 
                 width: 85%; 
                 flex: none; 
                 border-radius: 200px 0 0 0; 
-                margin-top: -50px; /* ここで余白を詰めています */
+                margin-top: -50px; 
                 background-position: center 40%; 
                 position: relative;
                 z-index: 1;
@@ -143,11 +124,20 @@
             .gold-separator { margin: 10px 0; }
             .names-container { font-size: 1.0rem; }
             .info-box { margin-top: 20px; }
-
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
-            .scroll-down { right: 15px; bottom: 30px; font-size: 0.6rem; }
+            /* モバイル用SCROLL DOWNの位置微調整 */
+            .scroll-down { 
+                right: 15px; 
+                bottom: 80px; /* 画像が大きくなった分、少し上に上げて見えやすく調整 */
+                font-size: 0.6rem; 
+                z-index: 100; /* 最前面に */
+            }
+            .scroll-down::after {
+                bottom: -50px; /* 線の長さを少し短くして収まりを良くする */
+                height: 40px;
+            }
 
             .menu-container { padding: 0 7%; }
             .menu-row { justify-content: flex-start; gap: 15px; }
