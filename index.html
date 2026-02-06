@@ -38,7 +38,7 @@
         .fixed-nav a { text-decoration: none; color: var(--text-color); font-size: 0.7rem; letter-spacing: 0.05em; transition: 0.3s; white-space: nowrap; }
         .fixed-nav a.disabled { color: var(--charcoal-gray); opacity: 0.7; pointer-events: none; }
 
-        /* --- ヒーローエリア --- */
+        /* --- ヒーローエリア (PCデフォルト) --- */
         .hero { display: flex; height: 100vh; width: 100%; position: relative; overflow: hidden; align-items: stretch; padding-top: 60px; box-sizing: border-box; }
         .hero-left { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 8%; z-index: 2; background: var(--main-bg); }
         
@@ -100,32 +100,39 @@
         .faq-link { text-decoration: none; color: var(--text-color); border-bottom: 1px solid #d1d1d1; font-size: 0.85rem; padding-bottom: 3px; transition: 0.3s; display: inline-block; }
         .faq-note { font-size: 0.65rem; color: #aaa; margin-top: 15px; letter-spacing: 0.05em; line-height: 1.6; max-width: 300px; }
 
-        /* --- モバイル対応修正 --- */
+        /* --- モバイル対応修正 (ここがスマホのみに適用されるエリア) --- */
         @media (max-width: 768px) {
             .fixed-nav { padding: 0 2%; gap: 8px; }
             .fixed-nav a { font-size: 0.6rem; }
 
             .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; }
-            .hero-left { padding: 10px 0 10px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
+            /* ①：詳細をさらに下げるためのpadding */
+            .hero-left { padding: 40px 0 20px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
             
+            /* ①：横幅を3/5 (60%) に変更 / ②：Rを日付の高さまで深くかける */
             .hero-right { 
-                height: 58vh; 
-                width: 85%; 
+                height: 55vh; 
+                width: 60%; 
                 flex: none; 
-                border-radius: 120px 0 0 0; /* the kawabun nagoyaと同じ高さで終わる設定 */
-                margin-top: -10px;
+                border-radius: 200px 0 0 0; 
+                margin-top: 0px;
                 background-position: center 20%; 
             }
             
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
             .gold-separator { margin: 10px 0; }
             .names-container { font-size: 1.0rem; }
-            .info-box { margin-top: 10px; }
+            /* ①：詳細情報を下げる */
+            .info-box { margin-top: 20px; }
 
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
             .scroll-down { right: 15px; bottom: 30px; font-size: 0.6rem; }
+
+            /* ③：メニューの左端をINVITATIONの左（7%）と揃える */
+            .menu-container { padding: 0 7%; }
+            .menu-row { justify-content: flex-start; gap: 20px; }
         }
     </style>
 </head>
