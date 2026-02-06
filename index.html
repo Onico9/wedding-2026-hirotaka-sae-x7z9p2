@@ -106,16 +106,31 @@
             .fixed-nav { padding: 0 7%; gap: 12px; justify-content: flex-start; }
             .fixed-nav a { font-size: 0.6rem; }
 
-            .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; overflow: hidden; }
-            .hero-left { padding: 40px 0 0px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
+            .hero { 
+                flex-direction: column; 
+                height: 100vh; 
+                align-items: flex-end; 
+                padding-top: 60px; 
+                overflow: hidden; 
+                display: flex;
+            }
+            
+            .hero-left { 
+                padding: 30px 0 10px 7%; 
+                flex: none; 
+                width: 100%; 
+                box-sizing: border-box; 
+                justify-content: flex-start; 
+                background: none; 
+            }
             
             .hero-right { 
-                height: 90vh; 
-                width: 80%; 
-                flex: none; 
-                border-radius: 200px 0 0 0; 
-                margin-top: -40px; 
-                background-position: center 10%; 
+                height: calc(100vh - 200px); /* 高さをしっかり確保 */
+                width: 85%; 
+                flex: 1; 
+                border-radius: 180px 0 0 0; 
+                margin-top: -20px; 
+                background-position: center 20%; /* 人物の見切れを防ぐために位置を調整 */
                 position: relative;
                 z-index: 1;
             }
@@ -123,20 +138,30 @@
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
             .gold-separator { margin: 10px 0; }
             .names-container { font-size: 1.0rem; }
-            .info-box { margin-top: 20px; }
+            .info-box { margin-top: 15px; }
             .info-time span { display: block; line-height: 1.4; }
             .info-time .slash { display: none; }
             
-            /* モバイル用SCROLL DOWNの位置微調整 */
+            /* モバイル用SCROLL DOWNの調整 */
             .scroll-down { 
-                right: 15px; 
-                bottom: 150px; /* 画像が大きくなった分、少し上に上げて見えやすく調整 */
+                right: 20px; 
+                bottom: 80px; /* 画面下部から少し上に配置 */
                 font-size: 0.6rem; 
-                z-index: 100; /* 最前面に */
+                z-index: 100;
+                color: var(--gold-accent); /* 白い空と同化しないようゴールドに変更 */
+                text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
             }
+            
             .scroll-down::after {
-                bottom: -50px; /* 線の長さを少し短くして収まりを良くする */
+                content: "";
+                position: absolute;
+                bottom: -50px;
+                left: 50%;
+                width: 1px;
                 height: 40px;
+                background: var(--gold-accent); /* 線の色もゴールドに */
+                animation: scrollLine 2s infinite;
+                box-shadow: none;
             }
 
             .menu-container { padding: 0 7%; }
