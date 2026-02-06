@@ -102,7 +102,6 @@
 
         /* --- モバイル対応修正 --- */
         @media (max-width: 768px) {
-            /* ②：メニュータブの左寄せと間隔修正 */
             .fixed-nav { 
                 padding: 0 7%; 
                 gap: 12px; 
@@ -110,17 +109,34 @@
             }
             .fixed-nav a { font-size: 0.6rem; }
 
-            .hero { flex-direction: column; height: 100vh; align-items: flex-end; padding-top: 60px; }
-            .hero-left { padding: 40px 0 20px 7%; flex: none; width: 100%; box-sizing: border-box; justify-content: flex-start; background: none; }
+            .hero { 
+                flex-direction: column; 
+                height: 100vh; 
+                align-items: flex-end; 
+                padding-top: 60px; 
+                overflow: hidden; 
+            }
+
+            /* 文字エリアの下の余白を最小化して画像に近づける */
+            .hero-left { 
+                padding: 40px 0 0px 7%; 
+                flex: none; 
+                width: 100%; 
+                box-sizing: border-box; 
+                justify-content: flex-start; 
+                background: none; 
+            }
             
-            /* ①：画像幅は85%を維持、カーブ（border-radius）のみ浅めに戻す */
+            /* 画像エリア：高さを出しつつマイナスマージンで文字へ近づける */
             .hero-right { 
                 height: 85vh; 
                 width: 85%; 
                 flex: none; 
-                border-radius: 200px 0 0 0; /* ここを元の240pxに戻しました */
-                margin-top: 0px;
+                border-radius: 200px 0 0 0; 
+                margin-top: -50px; /* ここで余白を詰めています */
                 background-position: center 40%; 
+                position: relative;
+                z-index: 1;
             }
             
             .invitation-text { font-size: 1.8rem; margin-top: 5px; }
@@ -133,7 +149,6 @@
             
             .scroll-down { right: 15px; bottom: 30px; font-size: 0.6rem; }
 
-            /* メニューの左端を揃える */
             .menu-container { padding: 0 7%; }
             .menu-row { justify-content: flex-start; gap: 15px; }
         }
